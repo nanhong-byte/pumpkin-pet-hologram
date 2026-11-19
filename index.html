@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>寵物投影屋拆解</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ink-gold kit:start */
+/* ==========================================================================
+   🖋️ 南瓜墨金美學 Pumpkin Ink & Gold — CSS Kit v1.9（V01 黃金版＋V02 綠意紙本版）
+   用法：整段貼進 <style>，<body class="ig"> 就生效。
+   中文頁面請寫 <html lang="zh-Hant">（標題字距會自動改成中文友善）。
+   ========================================================================== */
+
+:root {
+  /* ── 墨 Ink：所有文字與主要動作。同一個墨色，靠「透明度」分層，不換色 ── */
+  --ig-ink: #161415;                    /* 100% 標題、重要文字 */
+  --ig-ink-muted: rgba(22, 20, 21, .65); /* 65% 內文、描述 */
+  --ig-ink-soft: rgba(22, 20, 21, .45);  /* 45% 標籤、時間、計數 */
+  --ig-ink-faint: rgba(22, 20, 21, .18); /* 18% hover 邊框、停用 */
+  --ig-ink-hairline: rgba(22, 20, 21, .08); /* 8% 卡片髮絲線 */
+  --ig-ink-wash: rgba(22, 20, 21, .04);  /* 4% 淡底 */
+
+  /* ── 炭 Night：深色舞台（導覽列、收尾區塊、FAQ） ── */
+  --ig-night: #2D2B2C;
+  --ig-night-deep: #242223;
+  --ig-night-hover: #292728;
+  --ig-night-gradient: linear-gradient(135deg, #333233 0%, #242223 60%);
+  --ig-on-night: #FFFFFF;
+  --ig-on-night-muted: rgba(255, 255, 255, .68);
+  --ig-on-night-soft: rgba(255, 255, 255, .45);
+  --ig-night-line: rgba(255, 255, 255, .08);
+  --ig-night-wash: rgba(255, 255, 255, .04);
+
+  /* ── 紙 Paper：舞台底色 ── */
+  --ig-paper: #F5F5F5;
+  --ig-card: #FFFFFF;
+  --ig-card-alt: #FAFAFA;
+  --ig-dot: rgba(22, 20, 21, .10);
+  --ig-dot-gap: 16px;
+
+  /* ── 金 Gold：只畫重點（一個畫面一個主角） ── */
+  --ig-gold: #FDC302;
+  --ig-gold-light: #FFD83A;
+  --ig-gold-soft: #FCD94A;   /* 焦點光圈、深底上的 hover 字 */
+  --ig-gold-deep: #8A6400;   /* 淺底上的金色文字 */
+  --ig-gold-wash: #FEF3C7;
+  --ig-on-gold: #2D2B2C;     /* 金色上面的字：深炭，不是純黑 */
+  --ig-gold-gradient: linear-gradient(to top, #FDC302 0%, #FFD83A 100%);
+
+  /* ── 螢光點綴 Highlighter：只當「螢光筆底」用，少量 ── */
+  --ig-mark-yellow: #FDE68A;
+  --ig-mark-pink: #FDA4AF;
+  --ig-mark-blue: #BAE6FD;
+
+  /* ── 訊號與圖表 ── */
+  --ig-success: #059669;
+  --ig-danger: #DC2626;
+  --ig-chart-1: #FDC302;
+  --ig-chart-2: #4DA770;
+  --ig-chart-3: #D97858;
+  --ig-chart-4: #4D6BFE;
+  --ig-chart-5: #615CED;
+
+  /* ── 字體：英數走 Roboto，中文自動落到思源黑體／蘋方／正黑 ── */
+  --ig-font-sans: "Roboto", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ig-font-mono: "Roboto Mono", "SF Mono", Menlo, Consolas, "Noto Sans TC", "PingFang TC", monospace;
+
+  /* ── 圓角：18px 是招牌 ── */
+  --ig-r-sm: 8px;
+  --ig-r-md: 12px;
+  --ig-r-input: 14px;
+  --ig-r-card: 18px;
+  --ig-r-lg: 22px;
+  --ig-r-xl: 32px;
+  --ig-r-pill: 999px;
+
+  /* ── 陰影：平常幾乎沒有，靠髮絲線分層 ── */
+  --ig-shadow-xs: 0 1px 2px rgba(0, 0, 0, .04);
+  --ig-shadow-hover: 0 16px 32px -18px rgba(22, 20, 21, .22);
+  --ig-shadow-float: 0 14px 36px -16px rgba(0, 0, 0, .55);
+  --ig-shadow-stage: 0 40px 80px -44px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .06);
+  --ig-ring-gold: 0 0 0 1.4px var(--ig-gold);
+  --ig-glow-gold: 0 0 0 1.4px var(--ig-gold), 0 12px 26px -10px rgba(253, 195, 2, .55);
+  --ig-focus: 0 0 0 3px rgba(252, 217, 74, .45);
+
+  /* ── 動態：快、輕、不花俏 ── */
+  --ig-fast: 120ms;
+  --ig-base: 200ms;
+  --ig-slow: 320ms;
+  --ig-reveal: 620ms;
+  --ig-ease: cubic-bezier(.4, 0, .2, 1);
+  --ig-ease-emph: cubic-bezier(.2, 0, 0, 1);
+  --ig-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ig-ease-reveal: cubic-bezier(.22, 1, .36, 1);
+
+  /* ── 版寬 ── */
+  --ig-w-narrow: 720px;
+  --ig-w-base: 1100px;
+  --ig-w-wide: 1280px;
+  --ig-nav-h: 60px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --ig-fast: 1ms; --ig-base: 1ms; --ig-slow: 1ms; --ig-reveal: 1ms; }
+}
+
+/* ── 夜間版（中控台、長時間盯螢幕、XR 介面） ── */
+.ig[data-theme="night"] {
+  --ig-paper: #1A1819;
+  --ig-card: #242223;
+  --ig-card-alt: #292728;
+  --ig-ink: #F7F7F7;
+  --ig-ink-muted: rgba(247, 247, 247, .68);
+  --ig-ink-soft: rgba(247, 247, 247, .45);
+  --ig-ink-faint: rgba(247, 247, 247, .20);
+  --ig-ink-hairline: rgba(247, 247, 247, .08);
+  --ig-ink-wash: rgba(247, 247, 247, .04);
+  --ig-dot: rgba(255, 255, 255, .06);
+  --ig-gold-deep: #FCD94A;
+  --ig-shadow-hover: 0 16px 32px -18px rgba(0, 0, 0, .7);
+}
+
+/* ==========================================================================
+   基礎
+   ========================================================================== */
+:where(.ig), :where(.ig) *, :where(.ig) *::before, :where(.ig) *::after { box-sizing: border-box; }
+
+body.ig, .ig-page {
+  margin: 0;
+  font-family: var(--ig-font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ig-ink);
+  background-color: var(--ig-paper);
+  background-image: radial-gradient(var(--ig-dot) 1px, transparent 1.3px);
+  background-size: var(--ig-dot-gap) var(--ig-dot-gap);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 基礎元素規則用 :where() 降到最低權重，元件自己的顏色才不會被蓋掉 */
+:where(.ig) :where(h1, h2, h3, h4) { margin: 0; color: inherit; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; }
+:where(.ig) p { margin: 0; }
+:where(.ig) a { color: inherit; text-decoration: none; }
+:where(.ig) svg { flex-shrink: 0; }
+:where(.ig) :focus-visible { outline: none; box-shadow: var(--ig-focus); border-radius: var(--ig-r-sm); }
+:where(.ig) ::selection { background: var(--ig-mark-yellow); color: var(--ig-ink); }
+
+/* 中文：負字距會把中文擠在一起，改回 0 */
+:where(html[lang^="zh"]) :where(.ig) :where(h1, h2, h3, h4),
+html[lang^="zh"] .ig-display, html[lang^="zh"] .ig-h1, html[lang^="zh"] .ig-h2 { letter-spacing: 0; }
+
+.ig-container { width: 100%; max-width: var(--ig-w-base); margin: 0 auto; padding: 0 24px; }
+.ig-container--wide { max-width: var(--ig-w-wide); }
+.ig-container--narrow { max-width: var(--ig-w-narrow); }
+.ig-section { padding: 96px 0; }
+.ig-center { text-align: center; }
+
+/* ==========================================================================
+   字級
+   ========================================================================== */
+/* 招牌大標：粗黑一行＋細體一行。英文粗的那行可以斜，中文不斜 */
+.ig-display { font-size: clamp(38px, 5.4vw, 62px); line-height: 1.1; letter-spacing: -.03em; margin: 0; }
+html[lang^="zh"] .ig-display { line-height: 1.22; }
+.ig-display__strong { display: block; font-weight: 900; }
+.ig-display__strong em { font-style: italic; }            /* 只把英文/數字包 <em> */
+.ig-display__light { display: block; font-weight: 300; }
+
+.ig-h1 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; }
+.ig-h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; }
+.ig-h3 { font-size: 20px; font-weight: 600; line-height: 1.35; }
+.ig-lead { font-size: 17px; line-height: 1.75; color: var(--ig-ink-muted); max-width: 36em; }
+.ig-body { font-size: 16px; line-height: 1.75; color: var(--ig-ink-muted); }
+.ig-small { font-size: 14px; line-height: 1.6; color: var(--ig-ink-muted); }
+.ig-meta { font-size: 13px; color: var(--ig-ink-soft); }
+.ig-center .ig-lead { margin-left: auto; margin-right: auto; }
+
+/* 眉標：等寬字、全大寫、字距拉開——「系統標籤」的味道 */
+.ig-eyebrow { font-family: var(--ig-font-mono); font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--ig-ink-soft); }
+/* 數據：等寬字 */
+.ig-num { font-family: var(--ig-font-mono); font-weight: 500; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+
+/* 螢光筆重點（中文強調首選） */
+.ig-mark { background: linear-gradient(transparent 58%, var(--ig-mark-yellow) 58%, var(--ig-mark-yellow) 92%, transparent 92%); padding: 0 .08em; }
+.ig-mark--pink { background: linear-gradient(transparent 58%, var(--ig-mark-pink) 58%, var(--ig-mark-pink) 92%, transparent 92%); }
+.ig-mark--blue { background: linear-gradient(transparent 58%, var(--ig-mark-blue) 58%, var(--ig-mark-blue) 92%, transparent 92%); }
+.ig-gold-text { color: var(--ig-gold-deep); }
+
+/* ==========================================================================
+   按鈕
+   ========================================================================== */
+.ig-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 44px; padding: 0 20px; border-radius: var(--ig-r-pill);
+  font: 600 15px/1 var(--ig-font-sans); white-space: nowrap; cursor: pointer;
+  border: 1px solid transparent; text-decoration: none;
+  transition: transform var(--ig-base) var(--ig-ease), box-shadow var(--ig-base) var(--ig-ease),
+              background-color var(--ig-fast) var(--ig-ease), border-color var(--ig-fast) var(--ig-ease), color var(--ig-fast) var(--ig-ease);
+}
+.ig-btn svg { width: 16px; height: 16px; }
+.ig-btn:hover { transform: translateY(-1px); }
+.ig-btn:active { transform: translateY(0) scale(.98); }
+
+/* 金：一個畫面只放一顆 */
+.ig-btn--gold { background: var(--ig-gold-gradient); color: var(--ig-on-gold); border-color: rgba(255, 255, 255, .5); box-shadow: var(--ig-ring-gold); }
+.ig-btn--gold:hover { box-shadow: var(--ig-glow-gold); }
+/* 墨：次要主動作 */
+.ig-btn--ink { background: var(--ig-night); color: #fff; }
+.ig-btn--ink:hover { background: var(--ig-ink); }
+/* 白：一般動作 */
+.ig-btn--ghost { background: var(--ig-card); color: var(--ig-ink); border-color: var(--ig-ink-hairline); box-shadow: var(--ig-shadow-xs); }
+.ig-btn--ghost:hover { border-color: var(--ig-ink-faint); }
+/* 框：深色舞台上的次要動作 */
+.ig-btn--line { background: transparent; color: var(--ig-on-night); border-color: rgba(255, 255, 255, .18); }
+.ig-btn--line:hover { background: var(--ig-night-wash); border-color: rgba(255, 255, 255, .32); }
+.ig-btn--sm { height: 32px; padding: 0 14px; font-size: 14px; font-weight: 500; }
+.ig-btn--lg { height: 52px; padding: 0 26px; font-size: 16px; }
+.ig-btn--block { width: 100%; }
+
+/* 文字連結：hover 時出現金色底線 */
+.ig-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--ig-ink); text-decoration: underline; text-decoration-color: var(--ig-ink-faint); text-underline-offset: 4px; text-decoration-thickness: 1.5px; transition: text-decoration-color var(--ig-fast) var(--ig-ease); }
+.ig-link:hover { text-decoration-color: var(--ig-gold); }
+.ig-link svg { width: 16px; height: 16px; }
+
+/* 方形圖示鈕 */
+.ig-icon-btn { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--ig-r-md); border: 1px solid transparent; cursor: pointer; transition: transform var(--ig-base) var(--ig-ease), background-color var(--ig-fast) var(--ig-ease); }
+.ig-icon-btn svg { width: 18px; height: 18px; }
+.ig-icon-btn:hover { transform: translateY(-1px); }
+.ig-icon-btn--gold { background: var(--ig-gold-gradient); color: var(--ig-on-gold); box-shadow: var(--ig-ring-gold); }
+.ig-icon-btn--night { background: var(--ig-night); color: #fff; }
+.ig-icon-btn--wash { background: var(--ig-card); color: var(--ig-ink-muted); border-color: var(--ig-ink-hairline); }
+.ig-icon-btn--danger { background: #FEF2F2; color: var(--ig-danger); border-color: rgba(220, 38, 38, .15); }
+
+/* ==========================================================================
+   膠囊、標籤、徽章
+   ========================================================================== */
+/* 篩選膠囊（附計數） */
+.ig-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.ig-pill { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px; border-radius: var(--ig-r-pill); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); color: var(--ig-ink-muted); font: 500 14px/1 var(--ig-font-sans); cursor: pointer; transition: background-color var(--ig-fast) var(--ig-ease), border-color var(--ig-fast) var(--ig-ease), color var(--ig-fast) var(--ig-ease); }
+.ig-pill:hover { border-color: var(--ig-ink-faint); color: var(--ig-ink); }
+.ig-pill__n { font-size: 12px; color: var(--ig-ink-faint); font-variant-numeric: tabular-nums; }
+.ig-pill.is-active { background: var(--ig-ink); border-color: var(--ig-ink); color: #fff; }
+.ig-pill.is-active .ig-pill__n { color: rgba(255, 255, 255, .5); }
+
+/* 主題晶片（等寬字＋小圖示） */
+.ig-chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: var(--ig-r-pill); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); font: 400 13px/1 var(--ig-font-mono); color: var(--ig-ink); }
+.ig-chip svg { width: 14px; height: 14px; }
+
+/* 小標籤（卡片底部分類） */
+.ig-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 10px; border-radius: var(--ig-r-pill); background: var(--ig-ink-wash); color: var(--ig-ink-soft); font: 500 12px/1 var(--ig-font-sans); }
+/* 區段小徽章（例如「精選」「為什麼」） */
+.ig-kicker { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 12px; border-radius: var(--ig-r-pill); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); font: 500 12px/1 var(--ig-font-sans); color: var(--ig-ink-muted); }
+.ig-badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: var(--ig-r-pill); background: var(--ig-ink); color: #fff; font: 600 12px/1 var(--ig-font-sans); }
+.ig-badge--gold { background: var(--ig-gold); color: var(--ig-on-gold); }
+.ig-live { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ig-gold); box-shadow: 0 0 8px rgba(253, 195, 2, .7); }
+
+/* ==========================================================================
+   卡片
+   ========================================================================== */
+.ig-card { position: relative; background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); border-radius: var(--ig-r-card); padding: 24px; }
+.ig-card--link { display: block; transition: transform var(--ig-base) var(--ig-ease), box-shadow var(--ig-base) var(--ig-ease), border-color var(--ig-base) var(--ig-ease); }
+.ig-card--link:hover { transform: translateY(-2px); border-color: var(--ig-ink-faint); box-shadow: var(--ig-shadow-hover); }
+
+.ig-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.ig-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+.ig-grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+
+/* 工具卡（橫式：左 Logo 方塊＋右文字） */
+.ig-tool { display: flex; gap: 16px; padding: 16px; }
+.ig-tool__logo { width: 72px; height: 72px; flex: 0 0 72px; display: grid; place-items: center; border-radius: var(--ig-r-md); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); box-shadow: var(--ig-shadow-xs); color: var(--ig-ink); }
+.ig-tool__logo svg { width: 30px; height: 30px; }
+.ig-tool__body { min-width: 0; flex: 1; }
+.ig-tool__title { display: flex; align-items: center; gap: 6px; margin: 2px 0 4px; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--ig-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ig-tool__desc { font-size: 14px; line-height: 1.55; color: var(--ig-ink-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.1em; }
+.ig-tool__foot { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.ig-tool__arrow { position: absolute; top: 16px; right: 16px; width: 16px; height: 16px; color: var(--ig-ink-faint); transition: color var(--ig-fast) var(--ig-ease), transform var(--ig-base) var(--ig-ease); }
+.ig-card--link:hover .ig-tool__arrow { color: var(--ig-ink); transform: translate(2px, -2px); }
+
+/* 數據卡 */
+.ig-stat { display: flex; align-items: center; gap: 14px; padding: 16px 20px; }
+.ig-stat svg { width: 20px; height: 20px; color: var(--ig-ink-soft); }
+.ig-stat__n { font-family: var(--ig-font-mono); font-size: 22px; font-weight: 500; line-height: 1.1; color: var(--ig-ink); }
+.ig-stat__l { font-size: 13px; color: var(--ig-ink-soft); }
+
+/* 便當格（上插圖＋下文字） */
+.ig-tile { overflow: hidden; padding: 0; }
+.ig-tile__art { height: 180px; display: grid; place-items: center; border-bottom: 1px solid var(--ig-ink-hairline);
+  background-color: var(--ig-card-alt);
+  background-image: linear-gradient(var(--ig-ink-hairline) 1px, transparent 1px), linear-gradient(90deg, var(--ig-ink-hairline) 1px, transparent 1px);
+  background-size: 44px 44px; background-position: -1px -1px; }
+.ig-tile__body { padding: 20px 22px 24px; }
+.ig-tile--dark { background: var(--ig-night-deep); border-color: var(--ig-night-deep); }
+.ig-tile--dark .ig-tile__art { background-color: var(--ig-night); border-color: var(--ig-night-line); background-image: linear-gradient(var(--ig-night-line) 1px, transparent 1px), linear-gradient(90deg, var(--ig-night-line) 1px, transparent 1px); }
+.ig-tile--dark h3 { color: #fff; }
+.ig-tile--dark .ig-small { color: var(--ig-on-night-muted); }
+
+/* ==========================================================================
+   表單
+   ========================================================================== */
+.ig-search { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; border-radius: var(--ig-r-input); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); box-shadow: var(--ig-shadow-xs); transition: border-color var(--ig-fast) var(--ig-ease), box-shadow var(--ig-fast) var(--ig-ease); }
+.ig-search:focus-within { border-color: var(--ig-gold-soft); box-shadow: var(--ig-focus); }
+.ig-search svg { width: 18px; height: 18px; color: var(--ig-ink-soft); }
+.ig-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 400 16px/1 var(--ig-font-sans); color: var(--ig-ink); }
+.ig-search input::placeholder { color: var(--ig-ink-soft); }
+.ig-kbd { font: 500 12px/1 var(--ig-font-mono); color: var(--ig-ink-soft); border: 1px solid var(--ig-ink-hairline); border-bottom-width: 2px; border-radius: 6px; padding: 4px 6px; background: var(--ig-card-alt); }
+
+.ig-input { width: 100%; height: 44px; padding: 0 14px; border-radius: var(--ig-r-md); background: var(--ig-card); border: 1px solid var(--ig-ink-hairline); font: 400 15px/1 var(--ig-font-sans); color: var(--ig-ink); outline: 0; }
+.ig-input:focus { border-color: var(--ig-gold-soft); box-shadow: var(--ig-focus); }
+.ig-stage .ig-input { background: var(--ig-night-wash); border-color: rgba(255, 255, 255, .12); color: #fff; }
+.ig-stage .ig-input::placeholder { color: var(--ig-on-night-soft); }
+
+/* 進度條 */
+.ig-progress { height: 6px; border-radius: var(--ig-r-pill); background: var(--ig-ink-wash); overflow: hidden; }
+.ig-progress > i { display: block; height: 100%; border-radius: inherit; background: var(--ig-gold); }
+.ig-progress--ink > i { background: var(--ig-night); }
+.ig-progress--blue > i { background: var(--ig-chart-4); }
+
+/* ==========================================================================
+   導覽列（深炭浮動膠囊）
+   ========================================================================== */
+.ig-nav { position: sticky; top: 16px; z-index: 20; display: flex; align-items: center; gap: 8px; height: var(--ig-nav-h); margin: 16px auto 0; padding: 0 10px 0 20px; max-width: var(--ig-w-wide); border-radius: var(--ig-r-pill); background: var(--ig-night); box-shadow: var(--ig-shadow-float); color: #fff; }
+.ig-nav__brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; color: #fff; margin-right: auto; }
+.ig-nav__links { display: flex; gap: 2px; }
+.ig-nav__link { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: var(--ig-r-pill); font-size: 14px; color: rgba(247, 247, 247, .82); transition: background-color var(--ig-fast) var(--ig-ease), color var(--ig-fast) var(--ig-ease); }
+.ig-nav__link:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.ig-nav__link.is-active { background: rgba(255, 255, 255, .10); color: #fff; }
+.ig-nav__right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+@media (max-width: 860px) { .ig-nav__links { display: none; } }
+
+/* ==========================================================================
+   深色舞台（收尾、重點段落、FAQ）
+   ========================================================================== */
+.ig-stage { position: relative; background: var(--ig-night-gradient); color: var(--ig-on-night); border-radius: var(--ig-r-xl); padding: clamp(28px, 5vw, 64px); box-shadow: var(--ig-shadow-stage); overflow: hidden; }
+.ig-stage h1, .ig-stage h2, .ig-stage h3 { color: #fff; }
+.ig-stage .ig-eyebrow { color: var(--ig-on-night-soft); }
+.ig-stage .ig-lead, .ig-stage .ig-body, .ig-stage .ig-small { color: var(--ig-on-night-muted); }
+.ig-stage .ig-meta { color: var(--ig-on-night-soft); }
+.ig-stage-card { background: var(--ig-night-wash); border: 1px solid var(--ig-night-line); border-radius: var(--ig-r-card); padding: 18px; }
+
+/* 勾選清單 */
+.ig-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ig-checks li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.6; }
+.ig-checks svg { width: 18px; height: 18px; margin-top: 3px; color: var(--ig-gold); }
+.ig-compare { display: grid; gap: 8px; }
+.ig-compare .no { display: flex; gap: 10px; color: var(--ig-ink-muted); font-size: 15px; }
+.ig-compare .yes { display: flex; gap: 10px; color: var(--ig-ink); font-size: 15px; font-weight: 600; }
+.ig-compare .no svg { color: var(--ig-danger); width: 18px; height: 18px; margin-top: 3px; }
+.ig-compare .yes svg { color: var(--ig-success); width: 18px; height: 18px; margin-top: 3px; }
+
+/* 手風琴（FAQ） */
+.ig-acc { display: grid; gap: 10px; }
+.ig-acc details { background: var(--ig-night-wash); border: 1px solid var(--ig-night-line); border-radius: var(--ig-r-input); }
+.ig-acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; font-size: 15px; font-weight: 500; color: #fff; }
+.ig-acc summary::-webkit-details-marker { display: none; }
+.ig-acc summary::after { content: ""; width: 8px; height: 8px; border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; transform: rotate(45deg); opacity: .6; transition: transform var(--ig-base) var(--ig-ease); }
+.ig-acc details[open] summary::after { transform: rotate(225deg); }
+.ig-acc details p { padding: 0 18px 16px; color: var(--ig-on-night-muted); font-size: 15px; line-height: 1.75; }
+
+/* 頁尾 */
+.ig-footer { margin-top: 96px; background: var(--ig-paper); border-top: 1px solid var(--ig-ink-hairline); padding: 48px 0 28px; font-size: 14px; }
+.ig-footer h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.ig-footer a { display: block; color: var(--ig-ink-muted); padding: 4px 0; }
+.ig-footer a:hover { color: var(--ig-ink); }
+
+/* 進場動畫（加 .is-in 觸發） */
+.ig-reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--ig-reveal) var(--ig-ease-reveal), transform var(--ig-reveal) var(--ig-ease-reveal); }
+.ig-reveal.is-in { opacity: 1; transform: none; }
+
+@media (max-width: 640px) {
+  .ig-container { padding: 0 16px; }
+  .ig-section { padding: 64px 0; }
+  .ig-nav { margin: 12px 12px 0; }
+  .ig-tool__logo { width: 56px; height: 56px; flex-basis: 56px; }
+}
+
+/* 1.1 · Directory profile — exact content width, quieter hierarchy */
+:root{--ig-w-directory:1200px;--ig-grid-gap:12px;--ig-logo-size:76px;--ig-label-readable:rgba(22,20,21,.64);--ig-focus-ink:rgba(22,20,21,.8);--ig-dot-quiet:rgba(22,20,21,.055)}
+html:has(body.ig),body.ig{overflow-x:clip}
+body.ig.ig-directory{background-image:radial-gradient(var(--ig-dot-quiet) .7px,transparent 1px)}
+.ig-directory .ig-container{max-width:1248px;padding:0 24px}
+.ig-directory .ig-nav{width:calc(100% - 48px);max-width:var(--ig-w-directory);top:24px;margin:24px auto 0}
+.ig-directory .ig-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ig-grid-gap)}
+.ig-directory .ig-tool__logo{width:var(--ig-logo-size);height:var(--ig-logo-size);flex-basis:var(--ig-logo-size)}
+.ig-directory .ig-tool__logo svg{width:40px;height:40px}
+.ig-directory .ig-tool__title{display:block;padding-right:12px;line-height:1.5}
+.ig-directory .ig-tool__desc{line-height:1.6;min-height:3.2em}
+.ig-directory .ig-tool__foot{margin-top:10px}
+.ig-directory .ig-tool__foot .ig-tag{padding:0;background:transparent;font-size:12px;color:var(--ig-label-readable)}
+.ig-directory .ig-card--link:hover{transform:translateY(-1px)}
+.ig-directory .ig-pill__n{color:var(--ig-label-readable)}
+.ig-directory .ig-pill.is-active .ig-pill__n{color:var(--ig-on-night-muted)}
+.ig-directory .ig-tool__arrow{opacity:0}
+.ig-directory .ig-tool:hover .ig-tool__arrow,.ig-directory .ig-tool:focus-visible .ig-tool__arrow{opacity:1}
+.ig-directory .ig-tool__logo[data-tone="文件"]{color:var(--ig-chart-3)}
+.ig-directory .ig-tool__logo[data-tone="設計"]{color:var(--ig-chart-4)}
+.ig-directory .ig-tool__logo[data-tone="影像"]{color:var(--ig-chart-5)}
+.ig-directory .ig-tool__logo[data-tone="自動化"]{color:var(--ig-chart-2)}
+.ig-directory .ig-tool__logo[data-tone="生活"]{color:var(--ig-gold-deep)}
+.ig-directory :focus-visible{outline:2px solid var(--ig-focus-ink);outline-offset:3px;box-shadow:var(--ig-focus)}
+.ig[data-theme="night"]{--ig-label-readable:rgba(247,247,247,.65);--ig-focus-ink:rgba(255,255,255,.8)}
+@media(max-width:1023px){.ig-directory .ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.ig-directory .ig-grid{grid-template-columns:minmax(0,1fr)}.ig-directory .ig-container{padding:0 16px}.ig-directory .ig-nav{width:calc(100% - 24px);top:12px;margin-top:12px}.ig-directory .ig-tool__logo{width:64px;height:64px;flex-basis:64px}}
+@media(prefers-reduced-motion:reduce){.ig-card--link:hover,.ig-btn:hover,.ig-tool__arrow{transform:none!important}}
+
+
+/* 1.2 · interactive dots, optical icon system, complete day / night surfaces */
+body.ig.ig-has-dotfield{position:relative;isolation:isolate;background-image:none}
+.ig-dotfield{position:fixed;inset:0;pointer-events:none;z-index:-1;display:block}
+.ig{--ig-label-readable:rgba(22,20,21,.64);color-scheme:light}
+.ig[data-theme="night"]{--ig-label-readable:rgba(247,247,247,.68);--ig-focus-ink:#FCD94A;--ig-gold-wash:#483D20;color-scheme:dark}
+.ig[data-theme="night"] .ig-pill.is-active,.ig[data-theme="night"] .ig-badge{background:#F7F7F7;border-color:#F7F7F7;color:#242223}
+.ig[data-theme="night"] .ig-pill.is-active .ig-pill__n{color:#5D595B}
+.ig[data-theme="night"] .ig-btn--ink{background:#F7F7F7;color:#242223}
+.ig-theme-toggle{display:inline-grid;place-items:center;flex:none;width:36px;height:36px;padding:0;border:1px solid var(--ig-ink-hairline);border-radius:999px;background:var(--ig-card);color:var(--ig-ink);cursor:pointer}
+.ig-theme-toggle svg{width:18px;height:18px}
+.ig-theme-toggle:hover{border-color:var(--ig-ink-faint)}
+.ig-nav .ig-theme-toggle{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#fff}
+.ig-brand-logo{display:block;width:112px;height:auto;flex:none}
+.ig-nav .ig-brand-logo,.mini-nav .ig-brand-logo,.ig[data-theme="night"] .head>.ig-brand-logo{filter:invert(1)}
+.ig-tool__logo:has(img){overflow:hidden;border:0;box-shadow:none;background:transparent}
+.ig-tool__logo img{display:block;width:100%;height:100%;object-fit:contain}
+.ig-directory .ig-tool__logo:has(img){border-radius:16px}
+.ig[data-theme="night"] .ig-tool__logo img{filter:brightness(.9)}
+.ig[data-theme="night"] .accents button{color:#161415}
+.ig[data-theme="night"] .ig-highlight{color:#161415}
+.ig[data-theme="night"] .cell__font,.ig[data-theme="night"] .spec__note{color:var(--ig-label-readable)}
+@media(max-width:640px){.ig-nav .ig-brand-logo{width:92px}.ig-nav__right{gap:6px}.ig-nav__right>.ig-btn{padding:0 10px;font-size:12px}.ig-nav{padding-left:14px}.head .ig-brand-logo{width:100px}.head__links{margin-left:0}}
+
+/* ==========================================================================
+   1.9 · V02 配色（綠意紙本版）＋ 共用表演套件
+   - 配色：<body data-palette="v02">；不寫＝V01 黃金版。明暗仍用 data-theme="day|night"。
+   - V02 色票完整復刻 designed-to-scale.vercel.app（觀察日 2026-11-18）：淺色版飽和、暗色版降飽和，兩套各自定義。
+   - 表演（主題過場、資料夾展開、數值浮入、步驟條…）V01／V02 共用，只吃下面的語意變數，不寫死顏色。
+   ========================================================================== */
+
+/* ── 共用語意變數：V01 黃金版（淺） ── */
+.ig{
+  --ig-ink-2:#2D2B2C; --ig-line:rgba(22,20,21,.10); --ig-line-strong:rgba(22,20,21,.22); --ig-tree-line:rgba(22,20,21,.26);
+  --ig-drop:#161415; --ig-drop-2:#2D2B2C; --ig-raised:#FFFFFF; --ig-sheet:#FFFFFF; --ig-stage-bg:#FAFAFA;
+  --ig-accent:#FDC302; --ig-on-accent:#2D2B2C; --ig-accent-strong:#E5AE00; --ig-accent-text:#8A6400; --ig-accent-tint:#FEF3C7; --ig-glow:253,195,2;
+  --ig-tint-sand:#F1F0EE; --ig-tint-mint:#E6F4EA; --ig-tint-violet:#EFECFB; --ig-tint-blue:#E7F0FB; --ig-tint-amber:#FEF3C7; --ig-tint-red:#FDE8E8; --ig-tint-orange:#FDEBDD; --ig-on-red:#8F2A22;
+  --ig-good:#059669; --ig-warn:#D99A00; --ig-bad:#DC2626; --ig-warn-text:#8A6400; --ig-bad-text:#B91C1C;
+  --ig-hi:rgba(253,195,2,.55); --ig-hi-strong:rgba(253,195,2,.85);
+  --ig-dot-ink:45,43,44; --ig-dot-alpha:.3;
+  /* 資料夾九色（V01 取自圖示風格 8 組底色＋玫瑰） */
+  --ig-f-sand:#FDC302; --ig-f-sand-s:#C99700; --ig-f-green:#5FCF6F; --ig-f-green-s:#1E8A34;
+  --ig-f-violet:#9B6BF0; --ig-f-violet-s:#6A3FCC; --ig-f-orange:#FF7A4D; --ig-f-orange-s:#E04A2A;
+  --ig-f-blue:#5B7CFA; --ig-f-blue-s:#3552D8; --ig-f-teal:#2FC4B2; --ig-f-teal-s:#158F86;
+  --ig-f-rose:#E86A8C; --ig-f-rose-s:#B8405F; --ig-f-olive:#3A3638; --ig-f-olive-s:#161415;
+  --ig-f-slate:#8A8F98; --ig-f-slate-s:#5C6068;
+}
+/* ── V01 黃金版（深） ── */
+.ig[data-theme="night"]{
+  --ig-ink-2:#DADADA; --ig-line:rgba(247,247,247,.10); --ig-line-strong:rgba(247,247,247,.22); --ig-tree-line:rgba(247,247,247,.26);
+  --ig-drop:#000000; --ig-drop-2:#0D0C0C; --ig-raised:#2B292A; --ig-sheet:#242223; --ig-stage-bg:#201E1F;
+  --ig-accent-text:#FCD94A; --ig-accent-tint:#483D20;
+  --ig-tint-sand:#2E2C2D; --ig-tint-mint:#1F3328; --ig-tint-violet:#2B2740; --ig-tint-blue:#1F2B3A; --ig-tint-amber:#483D20; --ig-tint-red:#46282A; --ig-tint-orange:#45301F; --ig-on-red:#F5B5AE;
+  --ig-warn-text:#FCD94A; --ig-bad-text:#F8A5A0; --ig-dot-ink:247,247,247; --ig-dot-alpha:.18;
+}
+
+/* ── V02 綠意紙本版（淺）：飽和、暖紙 ── */
+.ig[data-palette="v02"]:not([data-theme="night"]){
+  /* 原站完整色票（名稱保留原 hex 方便對照；值才是實際顏色） */
+  --v2-paper:#f4ebe0;--v2-paper-2:#f7efe4;--v2-sheet:#f9f2e8;--v2-card:#f8f0e6;--v2-card-2:#f6eee3;--v2-line:#ddd3c5;--v2-line-soft:#e6ddd0;--v2-line-strong:#c6bbac;--v2-edge:#46413b;--v2-ink:#1d1b18;--v2-ink-2:#34302b;--v2-muted:#6f6961;--v2-muted-2:#8b847a;--v2-green:#cfe3b2;--v2-green-2:#b2d491;--v2-green-3:#7fc278;--v2-green-tile:#e8efd9;--v2-green-tile-line:#c9d6b3;--v2-violet:#e7ddf5;--v2-violet-tile:#ebe3f1;--v2-violet-tile-line:#d5c8e2;--v2-orange:#fcdcbd;--v2-mint:#dff0de;--v2-rust:#d0683a;--v2-rust-2:#d97a4f;--v2-drop:#1d1b18;--v2-drop-2:#34302b;
+  --v2-c-12240f:#12240f;--v2-c-1d7066:#1d7066;--v2-c-1f3b1c:#1f3b1c;--v2-c-1f63a0:#1f63a0;--v2-c-24521c:#24521c;--v2-c-2a7a3d:#2a7a3d;--v2-c-2a9d8f:#2a9d8f;--v2-c-2f86ce:#2f86ce;--v2-c-2f8a43:#2f8a43;--v2-c-3f8f4e:#3f8f4e;--v2-c-3fa456:#3fa456;--v2-c-434e61:#434e61;--v2-c-4caf50:#4caf50;--v2-c-5a43a6:#5a43a6;--v2-c-5c564e:#5c564e;--v2-c-5d564e:#5d564e;--v2-c-5f584f:#5f584f;--v2-c-5fae57:#5fae57;--v2-c-626d26:#626d26;--v2-c-64728a:#64728a;--v2-c-6d4a0c:#6d4a0c;--v2-c-7c63d0:#7c63d0;--v2-c-7d241d:#7d241d;--v2-c-8c9a3c:#8c9a3c;--v2-c-8f2a22:#8f2a22;--v2-c-8f8478:#8f8478;--v2-c-8f877c:#8f877c;--v2-c-8f887e:#8f887e;--v2-c-9a9286:#9a9286;--v2-c-a4824e:#a4824e;--v2-c-a5650c:#a5650c;--v2-c-a69d91:#a69d91;--v2-c-a6d38b:#a6d38b;--v2-c-a83a58:#a83a58;--v2-c-b0a698:#b0a698;--v2-c-b6ac9f:#b6ac9f;--v2-c-b8602f:#b8602f;--v2-c-b9b0a3:#b9b0a3;--v2-c-bdb4a8:#bdb4a8;--v2-c-bddb9e:#bddb9e;--v2-c-c0392b:#c0392b;--v2-c-c5bcb0:#c5bcb0;--v2-c-cde6ba:#cde6ba;--v2-c-d5b07a:#d5b07a;--v2-c-d6e5f6:#d6e5f6;--v2-c-d9577a:#d9577a;--v2-c-dcefd2:#dcefd2;--v2-c-e3ae3c:#e3ae3c;--v2-c-e5534b:#e5534b;--v2-c-e7efd9:#e7efd9;--v2-c-e8834d:#e8834d;--v2-c-e8a33a:#e8a33a;--v2-c-ebbcb3:#ebbcb3;--v2-c-eef3e2:#eef3e2;--v2-c-f1e8db:#f1e8db;--v2-c-f3eadd:#f3eadd;--v2-c-f6cfc7:#f6cfc7;--v2-c-f6e6c9:#f6e6c9;--v2-c-f8d5cf:#f8d5cf;--v2-c-faf3e9:#faf3e9;--v2-c-fbe5bd:#fbe5bd;--v2-c-fbebe7:#fbebe7;--v2-c-fbf6ef:#fbf6ef;--v2-c-fbf7f1:#fbf7f1;--v2-c-fde3a7:#fde3a7;--v2-c-ffffff:#fff;--v2-a-1:#ffffff8c;--v2-a-2:#ffffff59;--v2-a-3:#ffffff47;--v2-a-4:#fff0;--v2-a-5:#fff9;--v2-a-6:#503c2373;--v2-a-7:#1d1b18e6;--v2-a-8:#b2d491cc;--v2-a-9:#faf5eeb3;--v2-a-10:#ffffffb3;--v2-a-11:#503c2314;--v2-a-12:#fffcf7f2;--v2-a-13:#fffc;--v2-a-14:#503c230d;--v2-a-15:#fbf7f1eb;--v2-a-16:#7fc27800;--v2-a-17:#7fc2788c;--v2-a-18:#7fc2781f;--v2-a-19:#b2d491a6;--v2-a-20:#3a2c1c3d;--v2-a-21:#3c281499;--v2-a-22:#ffffff73;--v2-a-23:#3c281473;--v2-a-24:#3c28148c;--v2-a-25:#1d1b1859;--v2-a-26:#b2d491e6;--v2-a-27:#ffffffa6;--v2-a-28:#503c230f;--v2-a-29:#503c2359;
+  --ig-paper:#f4ebe0; --ig-card:#f9f2e8; --ig-card-alt:#f8f0e6;
+  --ig-ink:#1d1b18; --ig-ink-2:#34302b; --ig-ink-muted:#6f6961; --ig-ink-soft:#8b847a; --ig-label-readable:#6f6961;
+  --ig-ink-faint:#c6bbac; --ig-ink-hairline:#ddd3c5; --ig-ink-wash:rgba(80,60,35,.05);
+  --ig-night:#2b2722; --ig-night-deep:#211e1a; --ig-night-hover:#25211c; --ig-night-gradient:linear-gradient(135deg,#2e2a24 0%,#211e1a 60%);
+  --ig-on-night:#efe6d6; --ig-on-night-muted:rgba(239,230,214,.70); --ig-on-night-soft:rgba(239,230,214,.48); --ig-night-line:rgba(239,230,214,.10); --ig-night-wash:rgba(239,230,214,.05);
+  --ig-gold:#cfe3b2; --ig-gold-light:#dcebc6; --ig-gold-soft:#b2d491; --ig-gold-deep:#2f8a43; --ig-gold-wash:#e8efd9; --ig-on-gold:#1d1b18;
+  --ig-gold-gradient:linear-gradient(to top,#c4dca3 0%,#cfe3b2 100%);
+  --ig-ring-gold:0 0 0 1.4px #7fc278; --ig-glow-gold:0 0 0 1.4px #7fc278,0 12px 26px -10px rgba(127,194,120,.55); --ig-focus:0 0 0 3px rgba(127,194,120,.45); --ig-focus-ink:#2f8a43;
+  --ig-mark-yellow:#fbe5bd; --ig-mark-pink:#f8d5cf; --ig-mark-blue:#d6e5f6;
+  --ig-success:#2f8a43; --ig-danger:#c0392b;
+  --ig-chart-1:#7fc278; --ig-chart-2:#e8a33a; --ig-chart-3:#d0683a; --ig-chart-4:#2f86ce; --ig-chart-5:#7c63d0;
+  --ig-shadow-hover:0 10px 22px -16px rgba(80,60,35,.35); --ig-shadow-xs:0 1px 0 rgba(80,60,35,.06);
+  --ig-line:#ddd3c5; --ig-line-strong:#c6bbac; --ig-tree-line:#a69d91;
+  --ig-drop:#1d1b18; --ig-drop-2:#34302b; --ig-raised:#fbf7f1; --ig-sheet:#f9f2e8; --ig-stage-bg:#faf3e9;
+  --ig-accent:#cfe3b2; --ig-on-accent:#1d1b18; --ig-accent-strong:#b2d491; --ig-accent-text:#2f8a43; --ig-accent-tint:#e8efd9; --ig-glow:127,194,120;
+  --ig-tint-sand:#f6e6c9; --ig-tint-mint:#dff0de; --ig-tint-violet:#e7ddf5; --ig-tint-blue:#d6e5f6; --ig-tint-amber:#fbe5bd; --ig-tint-red:#f8d5cf; --ig-tint-orange:#fcdcbd; --ig-on-red:#7d241d;
+  --ig-good:#4caf50; --ig-warn:#e8a33a; --ig-bad:#e5534b; --ig-warn-text:#a5650c; --ig-bad-text:#c0392b;
+  --ig-hi:rgba(178,212,145,.8); --ig-hi-strong:rgba(178,212,145,.9);
+  --ig-dot-ink:70,65,59; --ig-dot-alpha:.26;
+  --ig-f-sand:#d5b07a; --ig-f-sand-s:#a4824e; --ig-f-green:#3fa456; --ig-f-green-s:#2a7a3d;
+  --ig-f-violet:#7c63d0; --ig-f-violet-s:#5a43a6; --ig-f-orange:#e8834d; --ig-f-orange-s:#b8602f;
+  --ig-f-blue:#2f86ce; --ig-f-blue-s:#1f63a0; --ig-f-teal:#2a9d8f; --ig-f-teal-s:#1d7066;
+  --ig-f-rose:#d9577a; --ig-f-rose-s:#a83a58; --ig-f-olive:#8c9a3c; --ig-f-olive-s:#626d26;
+  --ig-f-slate:#64728a; --ig-f-slate-s:#434e61;
+  color-scheme:light;
+}
+/* ── V02 綠意紙本版（深）：降飽和、暖炭 ── */
+.ig[data-palette="v02"][data-theme="night"]{
+  --v2-paper:#211e1a;--v2-paper-2:#25211c;--v2-sheet:#28241f;--v2-card:#26231e;--v2-card-2:#24201c;--v2-line:#342f28;--v2-line-soft:#29251f;--v2-line-strong:#4f473d;--v2-edge:#c6bfb7;--v2-ink:#efe6d6;--v2-ink-2:#ddd3c2;--v2-muted:#a3998b;--v2-muted-2:#8d7f6c;--v2-green:#3f4c2b;--v2-green-2:#2e3b22;--v2-green-3:#7fc278;--v2-green-tile:#505c38;--v2-green-tile-line:#3b422e;--v2-violet:#493563;--v2-violet-tile:#4f3e5c;--v2-violet-tile-line:#41354e;--v2-orange:#5a4531;--v2-mint:#3c5c3a;--v2-rust:#d0683a;--v2-rust-2:#d97a4f;--v2-drop:#050403;--v2-drop-2:#0b0907;
+  --v2-c-12240f:#bde1b7;--v2-c-1d7066:#aeeae3;--v2-c-1f3b1c:#bddeba;--v2-c-1f63a0:#1f63a0;--v2-c-24521c:#bae5b3;--v2-c-2a7a3d:#b3e5bf;--v2-c-2a9d8f:#2a9d8f;--v2-c-2f86ce:#2f86ce;--v2-c-2f8a43:#2f8a43;--v2-c-3f8f4e:#3f8f4e;--v2-c-3fa456:#3fa456;--v2-c-434e61:#c3cad5;--v2-c-4caf50:#4caf50;--v2-c-5a43a6:#5a43a6;--v2-c-5c564e:#b4aba0;--v2-c-5d564e:#b4aa9f;--v2-c-5f584f:#b2a99e;--v2-c-5fae57:#5fae57;--v2-c-626d26:#dde5b3;--v2-c-64728a:#64728a;--v2-c-6d4a0c:#ebd5ad;--v2-c-7c63d0:#7c63d0;--v2-c-7d241d:#ebb2ad;--v2-c-8c9a3c:#8c9a3c;--v2-c-8f2a22:#ebb2ad;--v2-c-8f8478:#8c7c6b;--v2-c-8f877c:#897c6a;--v2-c-8f887e:#887b69;--v2-c-9a9286:#7d7261;--v2-c-a4824e:#a4824e;--v2-c-a5650c:#ebd1ad;--v2-c-a69d91:#706557;--v2-c-a6d38b:#293820;--v2-c-a83a58:#a83a58;--v2-c-b0a698:#675d4f;--v2-c-b6ac9f:#5f564a;--v2-c-b8602f:#b8602f;--v2-c-b9b0a3:#5c5346;--v2-c-bdb4a8:#564e43;--v2-c-bddb9e:#344226;--v2-c-c0392b:#c0392b;--v2-c-c5bcb0:#4d463c;--v2-c-cde6ba:#3c502d;--v2-c-d5b07a:#d5b07a;--v2-c-d6e5f6:#344961;--v2-c-d9577a:#d9577a;--v2-c-dcefd2:#415c33;--v2-c-e3ae3c:#e3ae3c;--v2-c-e5534b:#e5534b;--v2-c-e7efd9:#4f5c38;--v2-c-e8834d:#e8834d;--v2-c-e8a33a:#e8a33a;--v2-c-ebbcb3:#51312b;--v2-c-eef3e2:#55603a;--v2-c-f1e8db:#1d1b17;--v2-c-f3eadd:#1f1c18;--v2-c-f6cfc7:#5c3931;--v2-c-f6e6c9:#5d4d32;--v2-c-f8d5cf:#5f3a33;--v2-c-faf3e9:#292520;--v2-c-fbe5bd:#5a4b30;--v2-c-fbebe7:#694239;--v2-c-fbf6ef:#2d2822;--v2-c-fbf7f1:#2e2923;--v2-c-fde3a7:#53472d;--v2-c-ffffff:#37312a;--v2-a-1:#fff0dc08;--v2-a-2:#fff0dc05;--v2-a-3:#fff0dc04;--v2-a-4:#fff0dc00;--v2-a-5:#fff0dc09;--v2-a-6:#000000cf;--v2-a-7:#000000e6;--v2-a-8:#689240a3;--v2-a-9:#2c2722b3;--v2-a-10:#fff0dc0b;--v2-a-11:#00000025;--v2-a-12:#332e27f2;--v2-a-13:#fff0dc0c;--v2-a-14:#00000017;--v2-a-15:#2e2923eb;--v2-a-16:#7fc27800;--v2-a-17:#7fc2788c;--v2-a-18:#7fc2781f;--v2-a-19:#68924085;--v2-a-20:#0000006e;--v2-a-21:#000000e6;--v2-a-22:#fff0dc07;--v2-a-23:#000000cf;--v2-a-24:#000000e6;--v2-a-25:#000000a1;--v2-a-26:#689240b8;--v2-a-27:#fff0dc0a;--v2-a-28:#0000001c;--v2-a-29:#000000a1;
+  --ig-paper:#211e1a; --ig-card:#28241f; --ig-card-alt:#26231e;
+  --ig-ink:#efe6d6; --ig-ink-2:#ddd3c2; --ig-ink-muted:#a3998b; --ig-ink-soft:#8d7f6c; --ig-label-readable:#a3998b;
+  --ig-ink-faint:#4f473d; --ig-ink-hairline:#342f28; --ig-ink-wash:rgba(255,240,220,.03);
+  --ig-night:#2e2923; --ig-night-deep:#1a1814; --ig-night-hover:#332e27; --ig-night-gradient:linear-gradient(135deg,#2e2923 0%,#1a1814 60%);
+  --ig-on-night:#efe6d6; --ig-on-night-muted:rgba(239,230,214,.70); --ig-on-night-soft:rgba(239,230,214,.48); --ig-night-line:rgba(239,230,214,.10); --ig-night-wash:rgba(239,230,214,.05);
+  --ig-gold:#3f4c2b; --ig-gold-light:#4a5933; --ig-gold-soft:#7fc278; --ig-gold-deep:#a6d38b; --ig-gold-wash:#505c38; --ig-on-gold:#efe6d6;
+  --ig-gold-gradient:linear-gradient(to top,#38442a 0%,#3f4c2b 100%);
+  --ig-ring-gold:0 0 0 1.4px #7fc278; --ig-glow-gold:0 0 0 1.4px #7fc278,0 12px 26px -10px rgba(127,194,120,.45); --ig-focus:0 0 0 3px rgba(127,194,120,.4); --ig-focus-ink:#7fc278;
+  --ig-mark-yellow:#5a4b30; --ig-mark-pink:#5f3a33; --ig-mark-blue:#344961;
+  --ig-success:#7fc278; --ig-danger:#e5534b;
+  --ig-chart-1:#7fc278; --ig-chart-2:#e8a33a; --ig-chart-3:#d0683a; --ig-chart-4:#2f86ce; --ig-chart-5:#7c63d0;
+  --ig-shadow-hover:0 10px 22px -16px rgba(0,0,0,.63);
+  --ig-line:#342f28; --ig-line-strong:#4f473d; --ig-tree-line:#706557;
+  --ig-drop:#050403; --ig-drop-2:#0b0907; --ig-raised:#2e2923; --ig-sheet:#28241f; --ig-stage-bg:#292520;
+  --ig-accent:#3f4c2b; --ig-on-accent:#efe6d6; --ig-accent-strong:#2e3b22; --ig-accent-text:#a6d38b; --ig-accent-tint:#505c38; --ig-glow:127,194,120;
+  --ig-tint-sand:#5d4d32; --ig-tint-mint:#3c5c3a; --ig-tint-violet:#493563; --ig-tint-blue:#344961; --ig-tint-amber:#5a4b30; --ig-tint-red:#5f3a33; --ig-tint-orange:#5a4531; --ig-on-red:#ebb2ad;
+  --ig-good:#4caf50; --ig-warn:#e8a33a; --ig-bad:#e5534b; --ig-warn-text:#ebd1ad; --ig-bad-text:#ebb2ad;
+  --ig-hi:rgba(104,146,64,.64); --ig-hi-strong:rgba(104,146,64,.72);
+  --ig-dot-ink:239,230,214; --ig-dot-alpha:.12;
+  --ig-f-sand:#d5b07a; --ig-f-sand-s:#a4824e; --ig-f-green:#3fa456; --ig-f-green-s:#b3e5bf;
+  --ig-f-violet:#7c63d0; --ig-f-violet-s:#5a43a6; --ig-f-orange:#e8834d; --ig-f-orange-s:#b8602f;
+  --ig-f-blue:#2f86ce; --ig-f-blue-s:#1f63a0; --ig-f-teal:#2a9d8f; --ig-f-teal-s:#aeeae3;
+  --ig-f-rose:#d9577a; --ig-f-rose-s:#a83a58; --ig-f-olive:#8c9a3c; --ig-f-olive-s:#dde5b3;
+  --ig-f-slate:#64728a; --ig-f-slate-s:#c3cad5;
+  color-scheme:dark;
+}
+/* V02 對 V01 寫死顏色的地方補回變數 */
+.ig[data-palette="v02"][data-theme="night"] .ig-pill.is-active,.ig[data-palette="v02"][data-theme="night"] .ig-badge{background:var(--ig-ink);border-color:var(--ig-ink);color:var(--ig-paper)}
+.ig[data-palette="v02"][data-theme="night"] .ig-btn--ink{background:var(--ig-ink);color:var(--ig-paper)}
+.ig[data-palette="v02"] .ig-nav .ig-theme-toggle{background:rgba(239,230,214,.08);border-color:rgba(239,230,214,.14);color:var(--ig-on-night)}
+
+/* ── 共用表演套件（V01／V02 同一份）── 
+   節奏：開合 340ms、浮入 360–450ms、按壓 120ms、過場 560ms；曲線 --ig-ease-out2＝cubic-bezier(.2,.7,.2,1)、彈一下＝--ig-ease-spring */
+:root{--ig-ease-out2:cubic-bezier(.2,.7,.2,1);--ig-ease-inout:cubic-bezier(.65,0,.35,1);--ig-swap:560ms}
+
+/* 1. 明暗／配色過場：從按鈕圓形擴散（由 ink-gold-ui.js 的 IG.swap 觸發） */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+.ig-theme-toggle svg{transition:transform .45s var(--ig-ease-spring)}
+.ig-theme-toggle:hover svg{transform:rotate(-18deg)}
+
+/* 2. 按鈕：實心按鈕（硬投影、按下去會沉）＋線框按鈕 */
+.ig-pop{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 16px;border:1.5px solid var(--ig-ink);border-radius:8px;background:var(--ig-accent);color:var(--ig-on-accent);font:inherit;font-size:14px;font-weight:700;line-height:1.15;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),1.5px 2.5px 0 var(--ig-drop);cursor:pointer;text-decoration:none;transition:transform var(--ig-fast) var(--ig-ease),box-shadow var(--ig-fast) var(--ig-ease),background-color .3s}
+.ig[data-theme="night"] .ig-pop{box-shadow:1.5px 2.5px 0 var(--ig-drop)}
+.ig-line-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 14px;border:1.3px solid var(--ig-ink-2);border-radius:8px;background:var(--ig-raised);color:var(--ig-ink);font:inherit;font-size:14px;font-weight:600;box-shadow:0 1.5px 0 var(--ig-drop-2);cursor:pointer;transition:transform var(--ig-fast) var(--ig-ease),box-shadow var(--ig-fast) var(--ig-ease)}
+.ig-line-btn:disabled{opacity:.4;cursor:default}
+.ig-pop:active,.ig-line-btn:not(:disabled):active{transform:translate(1px,1.5px);box-shadow:none}
+.ig-pop:focus-visible,.ig-line-btn:focus-visible,.ig-mod__head:focus-visible,.ig-leaf>*:focus-visible,.ig-steps button:focus-visible{outline:2px solid var(--ig-focus-ink,var(--ig-ink));outline-offset:2px}
+
+/* 3. 設計師署名（螢光筆底線，hover 會漲上來） */
+.ig-credit{display:inline-flex;align-items:center;gap:9px;padding:3px 4px 3px 3px;border-radius:9px;color:inherit;text-decoration:none}
+.ig-credit__mark{display:grid;place-items:center;flex:none;width:30px;height:30px;border:1.5px solid var(--ig-ink);border-radius:8px;background:var(--ig-accent);color:var(--ig-on-accent);font-size:15px;line-height:1;box-shadow:1.5px 2px 0 var(--ig-drop);transition:transform .2s var(--ig-ease-spring)}
+.ig-credit__text{display:flex;flex-direction:column;line-height:1.2}
+.ig-credit__text small{color:var(--ig-ink-soft);font-size:10px;font-weight:600;letter-spacing:.04em}
+.ig-credit__text b{font-size:14px;font-weight:700}
+.ig-credit__text b span{padding:0 2px;background:linear-gradient(transparent 58%,var(--ig-hi) 58%);transition:background .3s var(--ig-ease)}
+.ig-credit:hover .ig-credit__mark{transform:rotate(-8deg) scale(1.06)}
+.ig-credit:hover .ig-credit__text b span{background:linear-gradient(transparent 20%,var(--ig-hi-strong) 20%)}
+.ig-nav .ig-credit__text small{color:var(--ig-on-night-soft)}
+.ig-nav .ig-credit__text b{color:var(--ig-on-night)}
+.ig-nav .ig-credit__mark{border-color:var(--ig-on-night);box-shadow:none}
+
+/* 4. 配色切換鈕（V01 金／V02 綠） */
+.ig-palette-toggle{display:inline-flex;align-items:center;gap:7px;flex:none;height:36px;padding:0 12px 0 8px;border:1px solid var(--ig-ink-hairline);border-radius:999px;background:var(--ig-card);color:var(--ig-ink);font:600 12px/1 var(--ig-font-mono);cursor:pointer}
+.ig-palette-toggle:hover{border-color:var(--ig-ink-faint)}
+.ig-palette-toggle i{width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;background:var(--ig-accent);transition:transform .45s var(--ig-ease-spring)}
+.ig-palette-toggle:hover i{transform:rotate(180deg) scale(1.1)}
+.ig-nav .ig-palette-toggle{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:var(--ig-on-night)}
+
+/* 5. 資料夾樹（展開 340ms、箭頭轉 90°、子清單淡入下移） */
+.ig-tree{font-size:14px;color:var(--ig-ink)}
+:where(.ig-tree) ul{list-style:none;margin:0;padding:0}
+.ig-tree__root{display:flex;align-items:center;gap:9px;margin-bottom:8px;font-size:15px;font-weight:700}
+.ig-tree__meta,.ig-mod__count{margin-left:auto;color:var(--ig-ink-soft);font:600 11px/1 var(--ig-font-mono)}
+.ig-mod__head{display:flex;align-items:center;width:100%;min-height:34px;padding:3px 0;border:0;background:none;color:var(--ig-ink);font:inherit;font-weight:600;text-align:left;cursor:pointer}
+.ig-mod__chev{flex:none;width:14px;height:14px;margin-right:12px;color:var(--ig-ink-soft);transition:transform .3s var(--ig-ease-out2)}
+.ig-mod.is-open>.ig-mod__head .ig-mod__chev{transform:rotate(90deg)}
+.ig-mod__title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ig-mod__count{padding-left:8px}
+.ig-mod__body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s var(--ig-ease-out2)}
+.ig-mod.is-open>.ig-mod__body{grid-template-rows:1fr}
+.ig-mod__clip{min-height:0;overflow:hidden}
+.ig-mod__list{position:relative;margin:1px 5px 8px 7px;opacity:0;transform:translateY(-6px);transition:opacity .22s,transform .34s var(--ig-ease-out2)}
+.ig-mod.is-open .ig-mod__list{opacity:1;transform:none;transition-delay:40ms}
+.ig-mod__list::before{content:"";position:absolute;left:0;top:-2px;bottom:15px;border-left:1px solid var(--ig-tree-line)}
+.ig-leaf{position:relative;display:flex;align-items:center;min-height:30px;padding-left:25px;font-size:13px;font-weight:500}
+.ig-leaf::before{content:"";position:absolute;left:0;top:50%;width:13px;border-top:1px solid var(--ig-tree-line)}
+.ig-leaf>a,.ig-leaf>button{flex:1;display:flex;align-items:center;gap:10px;min-width:0;min-height:28px;margin-left:-8px;padding:2px 8px;border:1.5px solid transparent;border-radius:8px;background:none;color:var(--ig-ink);font:inherit;text-align:left;text-decoration:none;cursor:pointer;transition:background-color .3s,border-color .3s,box-shadow .3s}
+.ig-leaf>*:hover{background:var(--ig-ink-wash)}
+.ig-leaf__mark{flex:none;width:15px;height:15px;color:var(--ig-ink-soft)}
+.ig-leaf.is-done .ig-leaf__mark{color:var(--ig-accent-text)}
+.ig-leaf.is-current>*{background:var(--ig-accent);border-color:var(--ig-ink);box-shadow:1px 1.5px 0 var(--ig-drop);color:var(--ig-on-accent);font-weight:700}
+.ig-leaf.is-current .ig-leaf__mark{color:currentColor}
+.ig-leaf.is-soon>*{color:var(--ig-ink-soft);cursor:default}
+.ig-folder{flex:none;width:20px;height:16px;margin-right:11px}
+.ig-folder path{stroke-width:1.1;stroke-linejoin:round}
+.ig-folder .ig-folder__lip{fill:none;stroke-opacity:.55}
+.ig-folder--sand path{fill:var(--ig-f-sand);stroke:var(--ig-f-sand-s)}
+.ig-folder--green path{fill:var(--ig-f-green);stroke:var(--ig-f-green-s)}
+.ig-folder--violet path{fill:var(--ig-f-violet);stroke:var(--ig-f-violet-s)}
+.ig-folder--orange path{fill:var(--ig-f-orange);stroke:var(--ig-f-orange-s)}
+.ig-folder--blue path{fill:var(--ig-f-blue);stroke:var(--ig-f-blue-s)}
+.ig-folder--teal path{fill:var(--ig-f-teal);stroke:var(--ig-f-teal-s)}
+.ig-folder--rose path{fill:var(--ig-f-rose);stroke:var(--ig-f-rose-s)}
+.ig-folder--olive path{fill:var(--ig-f-olive);stroke:var(--ig-f-olive-s)}
+.ig-folder--slate path{fill:var(--ig-f-slate);stroke:var(--ig-f-slate-s)}
+
+/* 6. 貼紙標籤（ig-sticker；膠囊＋底部 1.5px 硬影）與章節標 */
+.ig-sticker{display:inline-flex;align-items:center;gap:6px;height:25px;padding:0 11px 0 10px;border:1.3px solid var(--ig-ink-2);border-radius:13px;background:var(--ig-raised);color:var(--ig-ink);font-size:12px;font-weight:600;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 1.5px 0 var(--ig-drop-2)}
+.ig[data-theme="night"] .ig-sticker{box-shadow:0 1.5px 0 var(--ig-drop-2)}
+.ig-sticker svg{width:13px;height:13px}
+.ig-sticker--sand{background:var(--ig-tint-sand)} .ig-sticker--mint{background:var(--ig-tint-mint)} .ig-sticker--violet{background:var(--ig-tint-violet)}
+.ig-sticker--blue{background:var(--ig-tint-blue)} .ig-sticker--amber{background:var(--ig-tint-amber)} .ig-sticker--orange{background:var(--ig-tint-orange)}
+.ig-sticker--red{background:var(--ig-tint-red);color:var(--ig-on-red)} .ig-sticker--accent{background:var(--ig-accent);color:var(--ig-on-accent)}
+.ig-sticker--ink{background:var(--ig-ink);border-color:var(--ig-ink);color:var(--ig-paper)}
+.ig-chapter{display:inline-flex;align-items:center;height:22px;padding:0 10px;border:1.3px solid var(--ig-ink-2);border-radius:11px;font:800 11px/1 var(--ig-font-sans);letter-spacing:.05em;box-shadow:0 1.5px 0 var(--ig-drop-2);background:var(--ig-tint-sand)}
+.ig-chapter.is-in{animation:ig-stat-in .36s var(--ig-ease-out2) 80ms both}
+@keyframes ig-stat-in{from{opacity:0;transform:translateX(var(--slide,0))}}
+
+/* 7. 數值卡（ig-stat）（左側狀態條；數值換掉往上浮入；變化時外圈光暈） */
+.ig-stats{display:flex;flex-wrap:wrap;gap:8px}
+.ig-stat{position:relative;display:flex;flex-direction:column;gap:2px;min-width:112px;padding:6px 11px 7px 12px;border:1px solid var(--ig-line-strong);border-radius:9px;background:color-mix(in srgb,var(--ig-raised) 92%,transparent);box-shadow:0 1px 0 var(--ig-line)}
+.ig-stat::before{content:"";position:absolute;left:-1px;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:transparent;transition:background .4s}
+.ig-stat[data-level="good"]::before{background:var(--ig-good)} .ig-stat[data-level="warn"]::before{background:var(--ig-warn)} .ig-stat[data-level="bad"]::before{background:var(--ig-bad)}
+.ig-stat__label{display:flex;align-items:center;gap:5px;color:var(--ig-ink-soft);font-size:11px;font-weight:700;letter-spacing:.04em}
+.ig-stat__label svg{width:12px;height:12px}
+.ig-stat__value{font:800 16px/1.3 var(--ig-font-mono);font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .4s}
+.ig-stat[data-level="warn"] .ig-stat__value{color:var(--ig-warn-text)} .ig-stat[data-level="bad"] .ig-stat__value{color:var(--ig-bad-text)}
+.ig-stat__value.is-swap,.ig-fresh{animation:ig-value-in .42s var(--ig-ease-out2)}
+@keyframes ig-value-in{from{opacity:0;transform:translateY(4px)}}
+.ig-stat.is-changed{animation:ig-stat-flash 1.5s ease-out}
+@keyframes ig-stat-flash{0%{box-shadow:0 0 0 0 rgba(var(--ig-glow),0);transform:translateY(0)}15%{box-shadow:0 0 0 4px rgba(var(--ig-glow),.55);transform:translateY(-2px)}to{box-shadow:0 0 0 10px rgba(var(--ig-glow),0);transform:translateY(0)}}
+
+/* 8. 勾選框與目標清單（打勾彈一下；半完成＝半格填色） */
+.ig-check{display:grid;place-items:center;flex:none;width:16px;height:16px;border:1.3px solid var(--ig-ink-soft);border-radius:3px;background:var(--ig-raised);color:var(--ig-on-accent);transition:background .3s,border-color .3s}
+.ig-check svg{width:11px;height:11px;opacity:0;transform:scale(.3);transition:opacity .2s,transform .32s var(--ig-ease-spring)}
+.ig-check.is-on{border-color:var(--ig-ink);background:var(--ig-accent-strong)}
+.ig-check.is-on svg{opacity:1;transform:none}
+.ig-check.is-part{background:linear-gradient(90deg,var(--ig-accent) 50%,var(--ig-raised) 50%)}
+.ig-goals{list-style:none;margin:0;padding:0}
+.ig-goals li{display:flex;align-items:flex-start;gap:10px;padding:4px 0;color:var(--ig-ink-muted);font-size:13px;line-height:1.5;transition:color .3s}
+.ig-goals li .ig-check{margin-top:2px}
+.ig-goals li.is-hit{color:var(--ig-ink)}
+
+/* 9. 進度條 */
+.ig-bar{position:relative;height:13px;border:1.3px solid var(--ig-ink-2);border-radius:7px;background:var(--ig-raised);overflow:hidden}
+.ig-bar>span{position:absolute;inset:0 auto 0 0;border-right:1.3px solid var(--ig-ink-2);border-radius:0 6px 6px 0;background:linear-gradient(var(--ig-accent),var(--ig-accent-strong));transition:width .6s var(--ig-ease-out2)}
+.ig-bar>span[style*="width: 0"],.ig-bar>span[style*="width:0"]{border-right:0}
+
+/* 10. 步驟條（軌道填色 700ms、當前步驟放大＋硬影） */
+.ig-steps{--n:5;position:relative}
+.ig-steps__rail{position:absolute;top:13px;left:calc(100% / var(--n) / 2);right:calc(100% / var(--n) / 2);height:1.3px;background:var(--ig-line-strong)}
+.ig-steps__rail>span{position:absolute;inset:-1px auto -1px 0;background:var(--ig-ink);transition:width .7s var(--ig-ease-inout)}
+.ig-steps ol{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));list-style:none;margin:0;padding:0}
+.ig-steps button{display:flex;flex-direction:column;align-items:center;width:100%;padding:0 2px;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
+.ig-steps__dot{display:grid;place-items:center;width:26px;height:26px;border:1.3px solid var(--ig-ink-soft);border-radius:50%;background:var(--ig-card);font:700 12px/1 var(--ig-font-mono);transition:background .3s,transform .3s var(--ig-ease-out2),border-color .3s}
+.ig-steps button:hover .ig-steps__dot{transform:translateY(-1px)}
+.ig-steps li.is-done .ig-steps__dot{background:var(--ig-accent-tint);border-color:var(--ig-ink-2)}
+.ig-steps li.is-current .ig-steps__dot{background:var(--ig-accent);border:1.5px solid var(--ig-ink);color:var(--ig-on-accent);box-shadow:1px 1.5px 0 var(--ig-drop);transform:scale(1.08)}
+.ig-steps__label{min-height:2.6em;margin-top:5px;color:var(--ig-ink-soft);font-size:12px;line-height:1.3;text-align:center}
+.ig-steps li.is-done .ig-steps__label{color:var(--ig-ink-2)}
+.ig-steps li.is-current .ig-steps__label{color:var(--ig-ink);font-weight:700}
+
+/* 11. 提示框（洞察＝紫、訣竅＝綠／金、注意＝紅） */
+.ig-callout{display:flex;gap:11px;padding:11px 12px 12px;border:1px solid var(--ig-line-strong);border-radius:10px;background:var(--ig-raised)}
+.ig-callout__icon{display:grid;place-items:center;flex:none;width:28px;height:28px;border:1.3px solid var(--ig-ink-2);border-radius:8px;background:var(--ig-raised)}
+.ig-callout__icon svg{width:15px;height:15px}
+.ig-callout__title{margin-bottom:3px;color:var(--ig-ink-soft);font-size:11px;font-weight:800;letter-spacing:.06em}
+.ig-callout p{margin:0;color:var(--ig-ink-2);font-size:13px;line-height:1.6}
+.ig-callout--insight{background:var(--ig-tint-violet);border-color:color-mix(in srgb,var(--ig-tint-violet) 70%,var(--ig-ink) 12%)}
+.ig-callout--tip{background:var(--ig-accent-tint);border-color:color-mix(in srgb,var(--ig-accent-tint) 70%,var(--ig-ink) 12%)}
+.ig-callout--tip .ig-callout__icon{background:var(--ig-accent);color:var(--ig-on-accent)}
+.ig-callout--warn{background:var(--ig-tint-red);border-color:color-mix(in srgb,var(--ig-tint-red) 70%,var(--ig-ink) 12%)}
+.ig-callout--warn .ig-callout__icon{color:var(--ig-on-red)}
+
+/* 12. 換頁接力：新內容依序滑入（--slide 給方向），舊內容 150ms 淡出 */
+.ig-enter>*{animation:ig-guide-in .36s var(--ig-ease-out2) .13s both}
+.ig-enter>:nth-child(2){animation-delay:.16s} .ig-enter>:nth-child(3){animation-delay:.19s} .ig-enter>:nth-child(4){animation-delay:.22s} .ig-enter>:nth-child(n+5){animation-delay:.25s}
+@keyframes ig-guide-in{from{opacity:0;transform:translateX(var(--slide,0))}to{opacity:1;transform:none}}
+.ig-leave{position:absolute;pointer-events:none;animation:ig-guide-out .15s ease-in both}
+@keyframes ig-guide-out{to{opacity:0;transform:translateX(var(--slide,0))}}
+
+/* 13. 浮出提示 */
+.ig-toast{position:fixed;left:50%;top:84px;z-index:60;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 11px;border:1.5px solid var(--ig-ink);border-radius:12px;background:var(--ig-raised);color:var(--ig-ink);box-shadow:2px 3px 0 var(--ig-drop),0 18px 36px -18px rgba(0,0,0,.45);opacity:0;pointer-events:none;transform:translate(-50%,-10px);transition:opacity .2s,transform .32s var(--ig-ease-out2)}
+.ig-toast.is-on{opacity:1;transform:translate(-50%,0)}
+.ig-toast__icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border:1.3px solid var(--ig-ink-2);border-radius:9px;background:var(--ig-accent);color:var(--ig-on-accent)}
+.ig-toast__text{font-size:14px;font-weight:800;white-space:nowrap}
+
+/* 14. 舞台小特效（封包到達、圈圈擴散、閃爍、按住） */
+.ig-fx-burst{animation:ig-fx-burst .6s var(--ig-ease-out2) both;transform-box:fill-box;transform-origin:center}
+@keyframes ig-fx-burst{0%{opacity:1;transform:scale(.7)}45%{opacity:1;transform:scale(1.25)}to{opacity:0;transform:scale(2.3)}}
+.ig-fx-pop{animation:ig-fx-pop .5s ease-out both;transform-box:fill-box;transform-origin:center}
+@keyframes ig-fx-pop{0%{opacity:.9;transform:scale(.8)}to{opacity:0;transform:scale(2)}}
+.ig-pulse{animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,to{opacity:.4}50%{opacity:1}}
+.ig-held{animation:ig-held 1.2s ease-in-out infinite}
+@keyframes ig-held{0%,to{stroke-width:1.5px}50%{stroke-width:3.4px}}
+
+@media (prefers-reduced-motion:reduce){
+  .ig-mod__body,.ig-mod__list,.ig-mod__chev,.ig-steps__rail>span,.ig-steps__dot,.ig-bar>span,.ig-check svg,.ig-toast,.ig-credit__mark,.ig-theme-toggle svg,.ig-palette-toggle i{transition:none!important}
+  .ig-enter>*,.ig-leave,.ig-chapter.is-in,.ig-stat.is-changed,.ig-stat__value.is-swap,.ig-fresh,.ig-fx-burst,.ig-fx-pop,.ig-pulse,.ig-held{animation:none!important}
+  .ig-pop:active,.ig-line-btn:active{transform:none}
+}
+
+/* 1.9 · 導覽列連結變多：不折行，放不下就橫向滑；署名不折行 */
+.ig-nav__links{min-width:0;overflow-x:auto;scrollbar-width:none}
+.ig-nav__links::-webkit-scrollbar{display:none}
+.ig-nav__link{flex:none;white-space:nowrap}
+.ig-nav__right{flex:none}
+.ig-credit{flex:none;white-space:nowrap}
+@media (max-width:1280px){.ig-nav .ig-credit__text{display:none}}
+
+/* ink-gold kit:end */
+
+/* ── 本頁：三欄導覽（資料夾樹｜舞台｜步驟說明） ── */
+.app{display:grid;grid-template-columns:270px minmax(0,1fr) 330px;gap:14px;max-width:1440px;height:max(680px,calc(100vh - 104px));margin:16px auto 0;padding:0 16px}
+.side,.rail{display:flex;flex-direction:column;gap:14px;min-height:0}
+.panel{border:1px solid var(--ig-line);border-radius:14px;background:var(--ig-sheet);box-shadow:0 1px 0 var(--ig-line),0 18px 40px -32px rgba(0,0,0,.35)}
+.side .ig-tree{flex:1;min-height:0;overflow:auto;padding:18px 12px 12px 16px;scrollbar-width:thin}
+.prog{padding:4px 16px 14px}
+.prog__head{display:flex;align-items:center;gap:10px;height:40px;font-size:13px;font-weight:700}
+.prog__head b{margin-left:auto;font:700 12px/1 var(--ig-font-mono)}
+.sheet{display:flex;flex-direction:column;min-width:0;min-height:0;padding:0 16px 16px}
+.head{padding:18px 4px 0}
+.crumb{color:var(--ig-ink-2);font-size:13px}
+.crumb span{margin:0 4px;color:var(--ig-ink-soft)}
+.head__row{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:6px}
+.head h1{margin:0;font-size:30px;font-weight:800;line-height:1.15;letter-spacing:0}
+.head p{margin:6px 0 0;color:var(--ig-ink-muted);font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;flex:none}
+.stage{position:relative;flex:1;min-height:300px;margin-top:12px;border:1px solid var(--ig-line);border-radius:12px;background:var(--ig-stage-bg);overflow:hidden}
+.stage .ig-stats{position:absolute;top:12px;left:12px;right:200px;z-index:2}
+.stage__tools{position:absolute;top:12px;right:12px;z-index:2;display:flex;gap:8px}
+.stage__tools .ig-line-btn{height:32px;padding:0 10px;font-size:13px}
+.stage svg.scene{position:absolute;inset:64px 10px 30px;width:calc(100% - 20px);height:calc(100% - 94px)}
+.legend{position:absolute;left:14px;bottom:9px;display:flex;gap:16px;color:var(--ig-ink-soft);font-size:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;border:1.2px solid var(--ig-ink-2);background:var(--ig-accent-strong)}
+.legend i.hit{background:transparent;border-style:dashed}
+.timeline{margin-top:12px;padding:10px 14px}
+.timeline__head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;font-size:13px;font-weight:700}
+.timeline__head span{color:var(--ig-ink-soft);font:600 12px/1 var(--ig-font-mono)}
+.guide{position:relative;display:flex;flex-direction:column;flex:1;min-height:0;padding:15px 16px 12px}
+.guide__meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:700}
+.guide__content{position:relative;flex:1;min-height:0;margin:0 -8px;padding:0 8px;overflow:hidden auto}
+.guide__content h2{margin:14px 0 10px;font-size:20px;font-weight:800;line-height:1.3}
+.guide__content p{margin:0 0 12px;color:var(--ig-ink-2);font-size:14px;line-height:1.75}
+.guide__content .ig-pop{height:34px;margin:0 0 14px;font-size:13px}
+.guide__nav{display:flex;gap:10px;margin-top:12px}
+.guide__nav .ig-pop{flex:1;justify-content:space-between}
+.guide__hint{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;color:var(--ig-ink-soft);font-size:12px}
+.goals{padding:13px 16px 12px}
+.goals h3,.prog__head span{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.02em}
+/* 舞台圖形 */
+.scene .floor-top{fill:var(--ig-raised);stroke:var(--ig-line-strong);stroke-width:1.2}
+.scene .floor-side{fill:color-mix(in srgb,var(--ig-raised) 82%,var(--ig-ink) 10%);stroke:var(--ig-line-strong);stroke-width:1.2}
+.scene .grid line{stroke:var(--ig-line);stroke-width:1}
+.scene .link{stroke:var(--ig-ink-2);stroke-width:1.5;stroke-dasharray:5 5;fill:none}
+.scene .blk path{stroke:var(--ig-ink-2);stroke-width:1.3;stroke-linejoin:round}
+.scene .blk .t{fill:var(--c)} .scene .blk .l{fill:color-mix(in srgb,var(--c) 84%,var(--ig-ink) 12%)} .scene .blk .r{fill:color-mix(in srgb,var(--c) 72%,var(--ig-ink) 20%)}
+.scene .blk.is-on .t{stroke:var(--ig-ink);stroke-width:2;animation:ig-held 1.2s ease-in-out infinite}
+.scene .lab rect{fill:var(--ig-raised);stroke:var(--ig-ink-2);stroke-width:1.3}
+.scene .lab text{fill:var(--ig-ink);font:700 12px var(--ig-font-sans);text-anchor:middle;dominant-baseline:central}
+.scene .pkt{fill:var(--ig-accent-strong);stroke:var(--ig-ink);stroke-width:1.2}
+.scene .ring{fill:none;stroke:var(--ig-good);stroke-width:2}
+/* 色票與表演清單 */
+.sec{max-width:1440px;margin:56px auto 0;padding:0 16px}
+.sec__head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.sec__head h2{margin:0;font-size:28px;font-weight:700}
+.sec__head p{margin:4px 0 0;color:var(--ig-ink-muted);font-size:14px}
+.pal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pal{padding:16px;border:1px solid var(--ig-line);border-radius:14px;background:var(--ig-paper);color:var(--ig-ink)}
+.pal h3{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;font-size:15px;font-weight:700}
+.pal h3 small{color:var(--ig-ink-soft);font:600 11px/1 var(--ig-font-mono)}
+.sw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.sw div{min-width:0}
+.sw i{display:block;height:34px;border:1px solid var(--ig-line);border-radius:8px}
+.sw b{display:block;margin-top:3px;overflow:hidden;color:var(--ig-ink-2);font:500 10px/1.3 var(--ig-font-sans);white-space:nowrap;text-overflow:ellipsis}
+.sw code{display:block;color:var(--ig-ink-soft);font:500 10px/1.3 var(--ig-font-mono)}
+.pal__demo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px;padding-top:12px;border-top:1px dashed var(--ig-line-strong)}
+.pal__demo .ig-pop,.pal__demo .ig-line-btn{height:32px;font-size:13px}
+.pal__folders{display:flex;gap:2px}
+.pal__folders .ig-folder{margin:0}
+.mo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mo{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--ig-line);border-radius:14px;background:var(--ig-sheet)}
+.mo h3{margin:0;font-size:15px;font-weight:700}
+.mo__meta{color:var(--ig-ink-soft);font:500 11px/1.4 var(--ig-font-mono)}
+.mo__view{display:grid;place-items:center;min-height:96px;padding:10px;border:1px dashed var(--ig-line-strong);border-radius:10px;background:var(--ig-stage-bg);overflow:hidden}
+.mo__play{align-self:flex-start;height:30px!important;padding:0 12px!important;font-size:12px!important}
+.mo__view .ig-steps{width:100%}
+.mo__view .ig-bar{width:100%}
+.mo__view .text>*{margin:2px 0;font-size:13px}
+.foot{max-width:1440px;margin:56px auto 0;padding:24px 16px 48px;border-top:1px solid var(--ig-line);color:var(--ig-ink-soft);font-size:13px;line-height:1.8}
+.foot b{color:var(--ig-ink)}
+/* 響應式 */
+@media (max-width:1180px){.app{grid-template-columns:240px minmax(0,1fr) 300px}.pal-grid,.mo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){
+  .app{grid-template-columns:minmax(0,1fr);height:auto}
+  .sheet{order:1}.rail{order:2}.side{order:3}
+  .stage{flex:none;height:420px}
+  .side .ig-tree{max-height:none}
+  .guide__content{overflow:visible}
+}
+@media (max-width:640px){
+  .head__row{flex-direction:column;align-items:flex-start;gap:10px}
+  .head h1{font-size:24px}
+  .stage{height:400px}
+  .stage .ig-stats{right:12px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .stage .ig-stat{flex:none;min-width:0}
+  .stage__tools{top:auto;bottom:8px}
+  .stage svg.scene{inset:72px 4px 44px;width:calc(100% - 8px);height:calc(100% - 116px)}
+  .legend{display:none}
+  .timeline__steps .ig-steps__label{font-size:10.5px}
+  .pal-grid,.mo-grid{grid-template-columns:minmax(0,1fr)}
+  .ig-nav__right .ig-credit__text{display:none}
+}
+@media (max-width:380px){.ig-steps__label{display:none}.timeline .ig-steps__dot{width:22px;height:22px;font-size:11px}}
+/* ── 本頁：寵物投影屋（三欄：零件樹｜3D 舞台｜步驟說明） ── */
+.stage canvas.gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.stage canvas.gl:active{cursor:grabbing}
+.stage .legend{z-index:2;pointer-events:none}
+.stage .legend i{background:var(--ig-ink-2);border-color:var(--ig-ink-2);border-radius:2px;height:2px;width:14px}
+.stage .legend i.hit{background:transparent;border:0;border-top:1.6px dashed var(--ig-ink-soft);height:0}
+.tree-hint{margin:10px 0 0;color:var(--ig-ink-soft);font-size:12px}
+.ig-leaf .sw{width:9px;height:9px;border-radius:3px;border:1.2px solid var(--ig-ink-2);background:var(--c);flex:none}
+.tags3d{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.tag{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;opacity:0;will-change:transform,opacity}
+.tag__s{display:inline-flex;align-items:center;gap:6px;height:25px;padding:0 10px 0 8px;border:1.3px solid var(--ig-ink-2);border-radius:13px;background:var(--ig-raised);color:var(--ig-ink);font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 1.5px 0 var(--ig-drop-2)}
+.tag__s i{width:9px;height:9px;border-radius:3px;border:1.2px solid var(--ig-ink-2);background:var(--c,var(--ig-raised));flex:none}
+.tag__s small{color:var(--ig-ink-muted);font-size:11.5px;font-weight:500}
+.tag__stem{width:1.3px;height:12px;background:var(--ig-ink-2)}
+.tag__dot{width:7px;height:7px;border-radius:50%;border:1.3px solid var(--ig-ink-2);background:var(--ig-raised)}
+.tag.is-v .tag__s{border-style:dashed}
+.tag.is-focus .tag__s{background:var(--ig-accent);border-color:var(--ig-ink);box-shadow:1px 1.5px 0 var(--ig-drop)}
+.inset{position:absolute;right:12px;bottom:12px;z-index:2;display:flex;align-items:center;gap:8px;padding:10px 12px 8px;border:1px solid var(--ig-line-strong);border-radius:12px;background:var(--ig-raised);box-shadow:0 1px 0 var(--ig-line);color:var(--ig-ink-2);opacity:0;transform:translateY(8px);transition:opacity .32s var(--ig-ease-out2),transform .32s var(--ig-ease-out2);pointer-events:none}
+.inset.is-on{opacity:1;transform:none}
+.inset figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.inset canvas{width:44px;height:89px;border:1.3px solid var(--ig-ink-2);border-radius:7px;background:var(--ig-stage-bg)}
+.inset figcaption{font-size:11px;font-weight:700;color:var(--ig-ink-muted)}
+.guide__content .ig-callout{margin:4px 0 12px}
+.clue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.clue{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px}
+.clue h3{margin:4px 0 0;font-size:17px;font-weight:700;line-height:1.45}
+.clue p{margin:0;color:var(--ig-ink-muted);font-size:14px;line-height:1.7}
+.tbl{overflow-x:auto;padding:0}
+.tbl table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:11px 16px;border-bottom:1px solid var(--ig-line);text-align:left;vertical-align:top;line-height:1.65}
+.tbl th{color:var(--ig-ink-soft);font-size:12px;font-weight:700;letter-spacing:.04em}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{white-space:nowrap;font-weight:700}
+.tbl td:nth-child(2){color:var(--ig-ink-2);white-space:nowrap}
+.tbl td:last-child{color:var(--ig-ink-muted)}
+.sw-dot{display:inline-block;width:10px;height:10px;margin-right:9px;border-radius:3px;border:1.2px solid var(--ig-ink-2);background:var(--c);vertical-align:-1px}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.flow li{display:flex;flex-direction:column;gap:10px;padding:16px}
+.flow__n{display:grid;place-items:center;width:28px;height:28px;border:1.3px solid var(--ig-ink-2);border-radius:50%;background:var(--ig-card);font:700 12px/1 var(--ig-font-mono)}
+.flow li:last-child .flow__n{background:var(--ig-accent);border:1.5px solid var(--ig-ink);box-shadow:1px 1.5px 0 var(--ig-drop)}
+.flow h3{margin:0;font-size:16px;font-weight:700}
+.flow p{margin:4px 0 0;color:var(--ig-ink-muted);font-size:13.5px;line-height:1.7}
+.diy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.foot a{color:var(--ig-accent-text)}
+@media (max-width:1180px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){.stage{height:520px}}
+@media (max-width:640px){
+  .stage{height:480px}
+  .flow,.diy-grid{grid-template-columns:minmax(0,1fr)}
+  .tag__s small{display:none}
+  .inset{right:8px;bottom:48px}
+  .stage .legend{display:none}
+}
+.shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:10px}
+.shot{margin:0;display:flex;flex-direction:column;gap:8px}
+.shot__img{position:relative;border:1px solid var(--ig-line-strong);border-radius:14px;overflow:hidden;background:var(--ig-ink);box-shadow:0 1px 0 var(--ig-line)}
+.shot__img img{display:block;width:100%;height:auto}
+.pin{position:absolute;display:grid;place-items:center;width:26px;height:26px;transform:translate(-50%,-50%);border:1.5px solid var(--ig-ink);border-radius:50%;background:var(--ig-accent);color:var(--ig-on-accent);font:800 12px/1 var(--ig-font-mono);box-shadow:1px 1.5px 0 var(--ig-drop)}
+.pin::after{content:"";position:absolute;inset:-7px;border:1.5px dashed rgba(255,255,255,.85);border-radius:50%}
+.shot figcaption{display:flex;gap:8px;align-items:baseline;font-size:13px;color:var(--ig-ink-muted)}
+.shot figcaption b{color:var(--ig-ink);font-weight:700;white-space:nowrap}
+.shots__note{margin:0 0 16px;color:var(--ig-ink-soft);font-size:12.5px}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.ref{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;color:inherit;text-decoration:none;transition:transform .2s var(--ig-ease),border-color .2s}
+.ref:hover{transform:translateY(-1px);border-color:var(--ig-line-strong)}
+.ref b{font-size:15px;font-weight:700;line-height:1.45}
+.ref>span:last-child{color:var(--ig-ink-muted);font-size:13.5px;line-height:1.7}
+@media (max-width:980px){.shots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body class="ig" data-palette="v02">
+<nav class="ig-nav" aria-label="主選單">
+  <a class="ig-nav__brand" href="#top"><img class="ig-brand-logo" src="logo.svg" alt="南瓜虛擬科技"></a>
+  <div class="ig-nav__links">
+    <a class="ig-nav__link is-active" href="#top" aria-current="page">光學拆解</a>
+    <a class="ig-nav__link" href="#clues">截圖證據</a>
+    <a class="ig-nav__link" href="#hardware">硬體</a>
+    <a class="ig-nav__link" href="#software">軟體</a>
+    <a class="ig-nav__link" href="#diy">自己做</a>
+    <a class="ig-nav__link" href="#refs">參考資料</a>
+  </div>
+  <div class="ig-nav__right">
+    <a class="ig-credit" href="#designer" title="設計師：南瓜"><span class="ig-credit__mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c-1.6-1.4-4.6-1.5-6.4.4-2.3 2.4-2.1 7.6.2 10.4 1.6 2 4.3 2.4 6.2 1.4 1.9 1 4.6.6 6.2-1.4 2.3-2.8 2.5-8-.2-10.4-1.8-1.9-4.4-1.8-6-.4Z"/><path d="M12 6.5V3.5c.6-.6 1.6-.9 2.6-.6"/><path d="M12 7c-1 2.6-1 9 0 12M9 7.6c-1.5 2.6-1.5 8.2 0 10.6M15 7.6c1.5 2.6 1.5 8.2 0 10.6"/></svg></span><span class="ig-credit__text"><small>設計師</small><b><span>南瓜</span></b></span></a>
+    <button class="ig-palette-toggle" type="button" data-ig-palette-toggle></button>
+    <button class="ig-theme-toggle" type="button" data-ig-theme-toggle aria-label="切換深色模式" aria-pressed="false"></button>
+  </div>
+</nav>
+
+<main id="top">
+<div class="app">
+  <aside class="side" aria-label="零件">
+    <div class="panel ig-tree">
+      <div class="ig-tree__root"><svg width="22" height="18" viewBox="0 0 20 16" aria-hidden="true"><path d="M1 3a2 2 0 0 1 2-2h4.3l2 2.2H17a2 2 0 0 1 2 2V13a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2Z" fill="currentColor"/></svg>零件<span class="ig-tree__meta">9 件</span></div>
+      <ul id="mods"></ul>
+      <p class="tree-hint">點零件可以單獨看那一片。</p>
+    </div>
+    <div class="panel prog">
+      <div class="prog__head"><span>看懂了</span><b id="progN">0 / 5</b></div>
+      <div class="ig-bar" role="progressbar" aria-label="看懂進度" aria-valuemin="0" aria-valuemax="5" id="progBar"><span style="width:0%"></span></div>
+    </div>
+  </aside>
+
+  <section class="sheet panel" aria-label="舞台">
+    <header class="head">
+      <div class="crumb">Pepper's Ghost<span>/</span>光學拆解<span>·</span>共 7 步</div>
+      <div class="head__row">
+        <h1>寵物投影屋拆解</h1>
+        <div class="tags">
+          <span class="ig-sticker ig-sticker--sand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>30 秒</span>
+          <span class="ig-sticker ig-sticker--mint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>9 件零件</span>
+          <span class="ig-sticker ig-sticker--violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>7 步</span>
+        </div>
+      </div>
+      <p>不是全息投影。手機螢幕朝下，加一片 45° 的透明壓克力，就是 1862 年上過舞台的佩珀爾幻象。</p>
+    </header>
+    <div class="stage" id="stage">
+      <div class="ig-stats" id="chips"></div>
+      <div class="stage__tools">
+        <button class="ig-line-btn" type="button" id="replay"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>重播</button>
+        <button class="ig-line-btn" type="button" id="pause" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><span>暫停</span></button>
+      </div>
+      <div class="tags3d" id="tags3d"></div>
+      <div class="inset" id="inset" aria-hidden="true">
+        <figure><canvas id="inA" width="72" height="146"></canvas><figcaption>手機上</figcaption></figure>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <figure><canvas id="inB" width="72" height="146"></canvas><figcaption>盒子裡</figcaption></figure>
+      </div>
+      <div class="legend"><span><i></i>光</span><span><i class="hit"></i>大腦以為的位置</span><span>拖曳可轉視角</span></div>
+    </div>
+    <div class="timeline panel">
+      <div class="timeline__head">拆解步驟<span id="stepCount">第 1 步 · 共 7 步</span></div>
+      <div class="ig-steps timeline__steps" id="steps" style="--n:7"><div class="ig-steps__rail"><span style="width:0%"></span></div><ol></ol></div>
+    </div>
+  </section>
+
+  <aside class="rail" aria-label="說明">
+    <div class="panel guide">
+      <div class="guide__meta"><span id="stepMeta">第 1 / 7 步</span><span class="ig-chapter" id="chapter">開場</span></div>
+      <div class="guide__content" id="content" aria-live="polite"></div>
+      <div class="guide__nav">
+        <button class="ig-line-btn" type="button" id="back" aria-label="上一步"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>返回</button>
+        <button class="ig-pop" type="button" id="next"><span id="nextLabel">下一步</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      </div>
+      <div class="guide__hint"><span class="ig-kbd">←</span><span class="ig-kbd">→</span>換步驟</div>
+    </div>
+    <div class="panel goals">
+      <h3>你會看懂</h3>
+      <ul class="ig-goals" id="goals"></ul>
+    </div>
+  </aside>
+</div>
+
+<section class="sec" id="clues" aria-labelledby="cluesT">
+  <div class="sec__head"><div><h2 id="cluesT">從妳的四張截圖看到的證據</h2><p>每一條都指向同一個答案：反射，不是投影。</p></div></div>
+  <div class="shots"><figure class="shot"><div class="shot__img"><img src="img/shot-1.jpg" width="540" height="962" loading="lazy" alt="截圖 1：舉手前：右側有分身"><span class="pin" style="left:87%;top:52%">B</span><span class="pin" style="left:22%;top:21%">E</span></div><figcaption><b>截圖 1</b>舉手前：右側有分身</figcaption></figure><figure class="shot"><div class="shot__img"><img src="img/shot-2.jpg" width="540" height="962" loading="lazy" alt="截圖 2：盒頂露出倒過來的狗"><span class="pin" style="left:59%;top:6%">A</span><span class="pin" style="left:22%;top:69%">D</span></div><figcaption><b>截圖 2</b>盒頂露出倒過來的狗</figcaption></figure><figure class="shot"><div class="shot__img"><img src="img/shot-3.jpg" width="540" height="962" loading="lazy" alt="截圖 3：耳朵邊緣的彩虹紋"><span class="pin" style="left:72%;top:29%">C</span><span class="pin" style="left:22%;top:52%">D</span></div><figcaption><b>截圖 3</b>耳朵邊緣的彩虹紋</figcaption></figure><figure class="shot"><div class="shot__img"><img src="img/shot-4.jpg" width="540" height="962" loading="lazy" alt="截圖 4：結尾：蠟燭＋分身"><span class="pin" style="left:89%;top:52%">B</span><span class="pin" style="left:31%;top:31%">E</span></div><figcaption><b>截圖 4</b>結尾：蠟燭＋分身</figcaption></figure></div>
+  <p class="shots__note">影片來源：Instagram @puptriodog，經 Threads @please_police 轉貼。圖上字母對應下面的證據卡。</p>
+  <div class="clue-grid">
+    <article class="clue panel"><span class="ig-sticker ig-sticker--sand">A · 截圖 2</span><h3>頂上有一隻倒過來的狗</h3><p>那就是手機螢幕本身。手機朝下躺在頂蓋上，影片事先翻轉過，經鏡面反射才變正。</p></article>
+    <article class="clue panel"><span class="ig-sticker ig-sticker--blue">B · 截圖 1、4</span><h3>狗的右邊有一隻淡淡的分身</h3><p>透明側板又反射了一次。真正的立體投影不會多出鏡像分身。</p></article>
+    <article class="clue panel"><span class="ig-sticker ig-sticker--violet">C · 截圖 3</span><h3>輪廓帶彩虹色</h3><p>手機螢幕發出偏振光，穿過有內應力的壓克力就會出現彩虹紋，也就是光彈效應。</p></article>
+    <article class="clue panel"><span class="ig-sticker ig-sticker--mint">D · 截圖 2、3</span><h3>手伸過去，狗剛好舉手</h3><p>多半是事先生成好的舉手片段，拍攝時配合時間把手伸過去。盒子本身沒有感測器。</p></article>
+    <article class="clue panel"><span class="ig-sticker ig-sticker--amber">E · 截圖 1、4</span><h3>狗偏淡、半透明，旁邊點著蠟燭</h3><p>壓克力只反射一小部分光，大約一成以內，所以看得到後面的墊子。拍攝時點蠟燭、關大燈，就是在把環境壓暗。</p></article>
+  </div>
+</section>
+
+<section class="sec" id="hardware" aria-labelledby="hwT">
+  <div class="sec__head"><div><h2 id="hwT">硬體：盒子裡沒有電子零件</h2><p>唯一的光源和影像都來自妳自己的手機，盒子只負責光學和佈景。</p></div></div>
+  <div class="panel tbl"><table>
+    <thead><tr><th>零件</th><th>材質</th><th>作用</th></tr></thead>
+    <tbody>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-sand)"></i>手機</td><td>自備，OLED 最好</td><td>光源兼影像。螢幕朝下，亮度開到最高。OLED 的黑是真的不發光，背景最乾淨。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-green)"></i>45° 分光片</td><td>1–2 mm 透明壓克力或 PET 膜</td><td>整個魔術的核心：一部分光穿透，妳看得到佈景；一部分光反射，妳看得到狗。越薄，雙重影像越不明顯。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-green)"></i>前板、側板</td><td>透明壓克力</td><td>防塵，也讓妳從前方看進去。側板會多反射出一隻分身。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-green)"></i>背板</td><td>深色或霧面</td><td>背景越暗，反射出來的狗對比越高。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-violet)"></i>頂蓋</td><td>木板，開手機大小的窗</td><td>固定手機，也擋住旁邊的雜光。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-violet)"></i>底座＋抽屜</td><td>實木</td><td>放骨灰小罐或毛髮紀念，這也是賣價比一般骨灰罐高的理由。</td></tr>
+      <tr><td><i class="sw-dot" style="--c:var(--ig-f-orange)"></i>微景觀</td><td>圓墊、靠墊、碗、小球</td><td>給大腦一個真實的空間參考，狗看起來才像站在裡面。</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="software" aria-labelledby="swT">
+  <div class="sec__head"><div><h2 id="swT">軟體：真正的工夫在影片</h2><p>盒子很便宜，讓狗看起來像真的的是後面這五步。</p></div></div>
+  <ol class="flow">
+    <li class="panel"><span class="flow__n">1</span><div><h3>上傳照片</h3><p>賣家通常只要兩張以上清楚的寵物照片，正面、側面各一張。</p></div></li>
+    <li class="panel"><span class="flow__n">2</span><div><h3>去背</h3><p>用分割模型把狗從背景切出來。</p></div></li>
+    <li class="panel"><span class="flow__n">3</span><div><h3>AI 圖生影片</h3><p>生成搖尾巴、舉手、歪頭、吃飯等動作片段，背景一律純黑 #000000。</p></div></li>
+    <li class="panel"><span class="flow__n">4</span><div><h3>為盒子校正</h3><p>鏡像翻轉一次（鏡面會再翻回來）；腳底對齊畫面靠前的那端，讓狗踩在墊子上；比例符合真實體型；調高亮度彌補反射損失。</p></div></li>
+    <li class="panel"><span class="flow__n">5</span><div><h3>循環播放</h3><p>輸出成無縫循環影片，手機全螢幕播放、關掉自動鎖定。高階版本用 app 在幾段動作之間切換，做出餵食、摸摸的互動感。</p></div></li>
+  </ol>
+</section>
+
+<section class="sec" id="diy" aria-labelledby="diyT">
+  <div class="sec__head"><div><h2 id="diyT">想自己做的話</h2><p>四件事決定效果好不好。</p></div></div>
+  <div class="diy-grid">
+    <div class="ig-callout ig-callout--tip"><span class="ig-callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></span><div><div class="ig-callout__title">角度</div><p>分光片要剛好 45°。角度偏掉，狗就會往前倒或往後仰。</p></div></div>
+    <div class="ig-callout ig-callout--tip"><span class="ig-callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></svg></span><div><div class="ig-callout__title">純黑背景</div><p>影片背景有一點灰，整片壓克力就會蒙上一層霧。</p></div></div>
+    <div class="ig-callout ig-callout--warn"><span class="ig-callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div><div class="ig-callout__title">環境光</div><p>盒內和房間都暗一點效果差很多。截圖裡的蠟燭，其實就是在幫忙把環境壓暗。</p></div></div>
+    <div class="ig-callout ig-callout--insight"><span class="ig-callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></span><div><div class="ig-callout__title">佈景位置</div><p>虛像到分光片的距離，等於手機到分光片的距離。佈景往後擺，狗才會剛好踩在墊子上。</p></div></div>
+  </div>
+</section>
+<section class="sec" id="refs" aria-labelledby="refsT">
+  <div class="sec__head"><div><h2 id="refsT">參考資料</h2><p>這頁每個說法的出處。3D 尺寸是依截圖比例推估，不是原廠規格。</p></div></div>
+  <div class="ref-grid"><a class="ref panel" href="https://www.threads.com/@please_police/post/Df4c18ikyA9"><span class="ig-sticker ig-sticker--sand">Threads</span><b>原貼文：please_police「怎麼會有這樣的設計 哭哭欸」</b><span>四張截圖的來源影片與留言區（有人貼出蝦皮商品名「寵物全息投影屋」）。</span></a><a class="ref panel" href="https://jingsourcing.com/fb-pet-memory-box/"><span class="ig-sticker ig-sticker--mint">Jingsourcing</span><b>How This Pet "Digital Life" Product Went Viral</b><span>產品結構：45° 透明面、手機當光源、木底座＋壓克力盒、兩張照片生成影片、售價 69–109 美元。</span></a><a class="ref panel" href="https://en.wikipedia.org/wiki/Pepper%27s_ghost"><span class="ig-sticker ig-sticker--blue">Wikipedia</span><b>Pepper's ghost</b><span>佩珀爾幻象的原理與 1862 年舞台演出的歷史。</span></a><a class="ref panel" href="https://www.sixthtone.com/news/1018389"><span class="ig-sticker ig-sticker--violet">Sixth Tone</span><b>China's Tomb-Sweeping Day Now Includes Pets（2026-04）</b><span>AI 寵物全息紀念盒在中國電商的熱度，賣家用既有照片做出會動的貓狗。</span></a><a class="ref panel" href="https://arxiv.org/abs/2307.05501"><span class="ig-sticker ig-sticker--amber">arXiv</span><b>HIVA: Holographic Intellectual Voice Assistant</b><span>用一片玻璃或透明塑膠反射隱藏影像的 Pepper's Ghost 說明。</span></a><a class="ref panel" href="https://x.com/elvar_official/status/2122363445286728159"><span class="ig-sticker ig-sticker--orange">X</span><b>elvar_official：Mac 40 年一鏡到底拆解</b><span>妳給的動畫風格參考。網站擋掉讀取，我是照妳貼的文字描述做時間軸與爆炸圖。</span></a><a class="ref panel" href="#designer"><span class="ig-sticker ig-sticker--accent">設計系統</span><b>南瓜墨金美學 1.9 · V02 綠意紙本版</b><span>妳電腦上的 ~/GitHub/pumpkin-ink-gold：色票、表演元件、3D 明暗公式（§11、§13）。</span></a></div>
+</section>
+</main>
+
+<footer class="foot" id="designer">
+  <b>設計師：南瓜</b> · 南瓜墨金美學 1.9 · V02 綠意紙本版。參考：<a href="https://jingsourcing.com/fb-pet-memory-box/">Jingsourcing 對這類寵物紀念盒的拆解</a>（45° 透明面、手機當光源、兩張照片生成影片、售價 69–109 美元）、<a href="https://en.wikipedia.org/wiki/Pepper%27s_ghost">Wikipedia：Pepper's ghost</a>。3D 尺寸依截圖比例推估，不是原廠規格。
+</footer>
+<script>
+/* ink-gold ui:start */
+/* Pumpkin Ink & Gold 1.9 · 主題切換（圓形擴散過場）＋ 配色切換（V01 金／V02 綠）＋ 互動點格
+   - 明暗：[data-ig-theme-toggle]，記在 localStorage igTheme，網址 ?theme=night|day。
+   - 配色：[data-ig-palette-toggle]（輪流切）或 [data-ig-palette="v01|v02"]（指定），記在 igPalette，網址 ?palette=v02。
+   - 過場：支援 View Transition 的瀏覽器會從按下的按鈕畫圓擴散 560ms；減少動態時直接換。
+     別的程式也能用：window.IG.swap(() => { 改畫面 }, 按鈕元素)。
+   兩種點格模式，用 <body data-dots="…"> 或 <script data-dots="…"> 指定：
+   - magnetic（預設，南瓜 2026-09-20 定案＝Pumpkin Notes 首頁的效果）：16px 細點，像被小磁鐵吸引，
+       往游標靠、沿按鈕輪廓收攏，離開後回到原位。
+   - glow（選用，Pumpkin Notes 報告頁舊版）：點不移動，游標靠近的點變亮、變大。
+   兩種都不用金色、都尊重 prefers-reduced-motion。無外部相依。 */
+(() => {
+  'use strict';
+  const body = document.body;
+  if (!body || body.dataset.igUiReady) return;
+  body.dataset.igUiReady = 'true';
+  const externalTheme = document.currentScript?.dataset.theme === 'external';
+  const mode = (body.dataset.dots || document.currentScript?.dataset.dots || 'magnetic') === 'glow' ? 'glow' : 'magnetic';
+  body.dataset.dotsMode = mode;
+  const toggles = [...document.querySelectorAll('[data-ig-theme-toggle]')];
+  const moon = '<path d="M20.5 13a8.7 8.7 0 0 1-9.5-9.5A8.7 8.7 0 1 0 20.5 13Z"/>';
+  const sun = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>';
+  function updateButtons() {
+    const night = body.dataset.theme === 'night';
+    toggles.forEach(b => {
+      b.setAttribute('aria-label', night ? '切換淺色模式' : '切換深色模式');
+      b.setAttribute('title', night ? '切換淺色模式' : '切換深色模式');
+      b.setAttribute('aria-pressed', String(night));
+      b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(night ? sun : moon)+'</svg>';
+    });
+  }
+  const reduceSwap = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : {matches:true};
+  // 圓形擴散過場：從按鈕中心畫圓，560ms、cubic-bezier(.4,0,.2,1)。不支援或減少動態就直接換。
+  function swap(apply, from) {
+    const root = document.documentElement;
+    if (typeof document.startViewTransition !== 'function' || reduceSwap.matches || !from || !root.animate) { apply(); return; }
+    const b = from.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2;
+    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.startViewTransition(apply).ready.then(() => {
+      root.animate({clipPath:[`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`]},
+        {duration:560, easing:'cubic-bezier(0.4, 0, 0.2, 1)', pseudoElement:'::view-transition-new(root)'});
+    }).catch(() => {});
+  }
+  window.IG = Object.assign(window.IG || {}, {swap});
+  if (!externalTheme) {
+    let theme = 'day';
+    try { if (localStorage.getItem('igTheme') === 'night') theme = 'night'; } catch (_) {}
+    try { const q=new URLSearchParams(location.search).get('theme'); if (q==='night'||q==='day') theme=q; } catch (_) {}
+    body.dataset.theme = theme;
+    toggles.forEach(b => b.addEventListener('click', () => swap(() => {
+      body.dataset.theme = body.dataset.theme === 'night' ? 'day' : 'night';
+      try { localStorage.setItem('igTheme', body.dataset.theme); } catch (_) {}
+    }, b)));
+  }
+  // 配色：V01 黃金版（預設）／V02 綠意紙本版。頁面自己寫死 data-palette 的，以頁面為準。
+  const at = (el, n) => typeof el.getAttribute === 'function' ? el.getAttribute(n) : null;
+  const paletteButtons = [...document.querySelectorAll('[data-ig-palette-toggle],[data-ig-palette]')].filter(b => !toggles.includes(b));
+  function updatePalette() {
+    const v02 = body.dataset.palette === 'v02';
+    paletteButtons.forEach(b => {
+      if (at(b,'data-ig-palette')) { b.setAttribute('aria-pressed', String((at(b,'data-ig-palette') === 'v02') === v02)); return; }
+      b.setAttribute('aria-label', v02 ? '目前 V02 綠意版，切換成 V01 黃金版' : '目前 V01 黃金版，切換成 V02 綠意版');
+      b.setAttribute('title', v02 ? '換成 V01 黃金版' : '換成 V02 綠意版');
+      b.innerHTML = '<i aria-hidden="true"></i>' + (v02 ? 'V02' : 'V01');
+    });
+  }
+  function setPalette(p) {
+    if (p === 'v02') body.dataset.palette = 'v02'; else delete body.dataset.palette;
+    try { localStorage.setItem('igPalette', p === 'v02' ? 'v02' : 'v01'); } catch (_) {}
+  }
+  if (!('paletteFixed' in body.dataset)) {
+    let palette = body.dataset.palette === 'v02' ? 'v02' : 'v01';
+    try { const saved = localStorage.getItem('igPalette'); if (saved === 'v02' || saved === 'v01') palette = saved; } catch (_) {}
+    try { const q=new URLSearchParams(location.search).get('palette'); if (q==='v02'||q==='v01') palette=q; } catch (_) {}
+    if (palette === 'v02') body.dataset.palette = 'v02'; else delete body.dataset.palette;
+    paletteButtons.forEach(b => b.addEventListener('click', () => {
+      const want = at(b,'data-ig-palette') || (body.dataset.palette === 'v02' ? 'v01' : 'v02');
+      if ((body.dataset.palette === 'v02') === (want === 'v02')) return;
+      swap(() => setPalette(want), b);
+    }));
+  }
+  window.IG.setPalette = p => setPalette(p);
+  updateButtons(); updatePalette();
+  const canvas = document.querySelector('#pn-dots') || document.createElement('canvas');
+  canvas.classList.add('ig-dotfield');
+  canvas.setAttribute('aria-hidden','true');
+  if (!canvas.isConnected) body.prepend(canvas);
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  body.classList.add('ig-has-dotfield');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const fine = matchMedia('(any-pointer: fine)');
+  let width=0, height=0, scale=1, spacing=16, radius=.6, raf=0, last=0;
+  let ink='45,43,44', opacity=.3;
+  const pointer={x:-1000,y:-1000,tx:-1000,ty:-1000,p:0,target:0};
+  let active=null, shapes=[];
+  const smooth = v => { const t=Math.max(0,Math.min(1,v)); return t*t*(3-2*t); };
+  const interactive = 'a,button,summary,[role="button"],select,input,textarea';
+  function enabled(){return !reduce.matches && fine.matches && (mode==='glow' || width>768) && !document.hidden;}
+  function color(){
+    const dark=body.dataset.theme==='night';
+    if(mode==='glow'){ink=dark?'255,255,255':'22,20,21'; opacity=dark?.06:.10;}
+    else{ink=dark?'247,247,247':'45,43,44'; opacity=dark?.18:.3;}
+    // V02 等配色可用 --ig-dot-ink / --ig-dot-alpha 換點的顏色（磁吸版才讀）
+    try {
+      const css=getComputedStyle(body), v=css.getPropertyValue&&css.getPropertyValue('--ig-dot-ink').trim(), a=parseFloat(css.getPropertyValue('--ig-dot-alpha'));
+      if(mode!=='glow'&&/^\d+\s*,\s*\d+\s*,\s*\d+$/.test(v||'')){ink=v;if(a>0&&a<1)opacity=a;}
+    } catch (_) {}
+  }
+  function size(){
+    width=innerWidth; height=innerHeight; scale=Math.min(devicePixelRatio||1,2);
+    canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
+    canvas.style.width=width+'px';canvas.style.height=height+'px';
+    ctx.setTransform(scale,0,0,scale,0,0);
+    const responsive=.8+.2*Math.max(0,Math.min(1,(width-360)/408));
+    if(mode==='glow'){spacing=24;radius=1;}else{spacing=16*responsive;radius=.6*responsive;}
+    if(!enabled()) reset(true); else wake();
+    draw();
+  }
+  function rectangle(el){
+    const b=el.getBoundingClientRect();
+    const css=getComputedStyle(el);
+    const value=css.borderTopLeftRadius;
+    const corner=value.includes('%')?Math.min(b.width,b.height)*parseFloat(value)/100:parseFloat(value)||0;
+    return {cx:b.x+b.width/2,cy:b.y+b.height/2,hw:b.width/2,hh:b.height/2,r:Math.min(corner,b.width/2,b.height/2)};
+  }
+  function distance(x,y,b){
+    const qx=Math.abs(x-b.cx)-b.hw+b.r, qy=Math.abs(y-b.cy)-b.hh+b.r;
+    return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-b.r;
+  }
+  function select(el){
+    if(el===active)return;
+    shapes.forEach(s=>s.target=0); active=el;
+    if(el)shapes.push({el,b:rectangle(el),p:0,target:1});
+    shapes=shapes.slice(-2);
+  }
+  function hit(){
+    if(mode==='glow'){select(null);return;}
+    const el=document.elementFromPoint(pointer.tx,pointer.ty)?.closest(interactive);
+    const b=el?.getBoundingClientRect();
+    select(el && !el.closest('[data-dots-still]') && b.width*b.height<width*height*.4 ? el : null);
+  }
+  function draw(){
+    ctx.clearRect(0,0,width,height);
+    const startX=mode==='glow'?spacing/2:-((scrollX%spacing+spacing)%spacing),startY=mode==='glow'?spacing/2:-((scrollY%spacing+spacing)%spacing);
+    const motion=enabled();
+    for(let y=startY;y<height+spacing;y+=spacing){
+      for(let x=startX;x<width+spacing;x+=spacing){
+        let dx=0,dy=0,strength=0;
+        if(mode==='glow'){
+          const k=motion&&pointer.p>.001?Math.max(0,1-Math.hypot(x-pointer.x,y-pointer.y)/140)*pointer.p:0;
+          ctx.beginPath();ctx.arc(x,y,radius*(1+.8*k),0,Math.PI*2);
+          ctx.fillStyle=`rgba(${ink},${(opacity+(.45-opacity)*k).toFixed(3)})`;ctx.fill();
+          continue;
+        }
+        if(motion && pointer.p>.001){
+          const attraction=smooth(1-Math.hypot(x-pointer.x,y-pointer.y)/160)*pointer.p;
+          dx=(pointer.x-x)*.26*attraction;dy=(pointer.y-y)*.26*attraction;strength=attraction;
+        }
+        if(motion){
+          let best=0, chosen=null, dist=0;
+          for(const s of shapes){
+            if(s.p<.001)continue;
+            const d=distance(x,y,s.b);
+            const pull=smooth(1-Math.abs(d)/64)*smooth(1-Math.hypot(x-pointer.x,y-pointer.y)/260)*s.p;
+            if(pull>best){best=pull;chosen=s.b;dist=d;}
+          }
+          if(chosen && best>.001){
+            const gx=distance(x+.5,y,chosen)-distance(x-.5,y,chosen),gy=distance(x,y+.5,chosen)-distance(x,y-.5,chosen);
+            const len=Math.hypot(gx,gy);
+            if(len>.001){dx-=gx/len*dist*best;dy-=gy/len*dist*best;strength=Math.max(strength,best);}
+          }
+        }
+        const r=radius*(1+.45*strength);
+        ctx.beginPath();ctx.arc(x+dx,y+dy,r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${ink},${opacity+.25*strength})`;ctx.fill();
+      }
+    }
+  }
+  function frame(time){
+    raf=0;
+    const dt=last?Math.min(32,time-last):16.67;last=time;
+    const ease=1-Math.exp(-dt/110), shapeEase=1-Math.exp(-dt/150);
+    pointer.x+=(pointer.tx-pointer.x)*ease;pointer.y+=(pointer.ty-pointer.y)*ease;
+    const goal=active?0:pointer.target;
+    pointer.p+=(goal-pointer.p)*ease;
+    let moving=Math.hypot(pointer.tx-pointer.x,pointer.ty-pointer.y)>.2 || Math.abs(goal-pointer.p)>.002;
+    shapes.forEach(s=>{
+      s.p+=(s.target-s.p)*shapeEase;
+      if(s.target && s.el.isConnected)s.b=rectangle(s.el);
+      if(Math.abs(s.target-s.p)>.002)moving=true;
+    });
+    shapes=shapes.filter(s=>s.target||s.p>.002);
+    draw();
+    if(moving && enabled())raf=requestAnimationFrame(frame);else last=0;
+  }
+  function wake(){if(!raf && !document.hidden)raf=requestAnimationFrame(frame);}
+  function reset(immediate=false){
+    pointer.target=0;select(null);
+    if(immediate){pointer.p=0;shapes=[];if(raf)cancelAnimationFrame(raf);raf=0;last=0;draw();}else wake();
+  }
+  window.addEventListener('pointermove',e=>{
+    if(!enabled() || e.pointerType==='touch')return;
+    if(!pointer.target){pointer.x=e.clientX;pointer.y=e.clientY;}
+    pointer.tx=e.clientX;pointer.ty=e.clientY;pointer.target=1;hit();wake();
+  },{passive:true});
+  document.documentElement.addEventListener('pointerleave',()=>reset());
+  window.addEventListener('blur',()=>reset());
+  window.addEventListener('resize',size,{passive:true});
+  window.addEventListener('scroll',()=>{if(enabled()&&pointer.target)hit();wake();},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)reset(true);else draw();});
+  reduce.addEventListener('change',()=>reset(true));fine.addEventListener('change',()=>reset(true));
+  new MutationObserver(()=>{updateButtons();updatePalette();color();draw();}).observe(body,{attributes:true,attributeFilter:['data-theme','data-palette']});
+  color();size();
+})();
+/* ink-gold ui:end */
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/lines/LineSegmentsGeometry.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/lines/LineMaterial.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/lines/LineSegments2.js"></script>
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s);
+const T=30;
+const reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const smooth=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
+const ramp=(t,a,b)=>smooth((t-a)/(b-a));
+
+/* ── 圖示（同 demo-guide 線條） ── */
+const ICON={
+  chev:'<path d="m9 18 6-6-6-6"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  box:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+  angle:'<path d="M4 20h16"/><path d="M4 20 18 6"/><path d="M10 20a6 6 0 0 0-1.8-4.2"/>',
+  phone:'<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+  tag:'<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+  bulb:'<path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2Z"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  warn:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>'
+};
+const svg=(k,w=15,extra='')=>`<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${ICON[k]}</svg>`;
+const folder=c=>`<svg class="ig-folder ig-folder--${c}" viewBox="0 0 20 16" aria-hidden="true"><path d="M1.2 3.2A2 2 0 0 1 3.2 1.2h4.1l2 2.2h7.5a2 2 0 0 1 2 2v8.4a2 2 0 0 1-2 2H3.2a2 2 0 0 1-2-2Z"/><path class="ig-folder__lip" d="M1.2 6.2h17.6"/></svg>`;
+
+/* ── 色票：一律從 CSS 語意變數讀，換 V01／V02、日夜都跟著換 ── */
+const body=document.body;
+const cssv=n=>getComputedStyle(body).getPropertyValue(n).trim();
+function col(str,over){str=str||'#000';const m=str.match(/rgba?\(([^)]+)\)/);if(m){const p=m[1].split(',').map(parseFloat);const c=new THREE.Color(p[0]/255,p[1]/255,p[2]/255);if(p.length>3&&over)c.lerp(over,1-p[3]);return c;}return new THREE.Color(str);}
+let PAL={};
+function readPal(){
+  const stage=col(cssv('--ig-stage-bg'));const g=n=>col(cssv(n),stage);
+  PAL={stage,raised:g('--ig-raised'),card:g('--ig-card'),ink:g('--ig-ink'),ink2:g('--ig-ink-2'),soft:g('--ig-ink-soft'),line:g('--ig-line-strong'),accent:g('--ig-accent'),accentStrong:g('--ig-accent-strong'),accentText:g('--ig-accent-text')};
+  ['sand','mint','violet','blue','amber','red','orange'].forEach(k=>PAL['t-'+k]=g('--ig-tint-'+k));
+  ['sand','green','violet','orange','blue','teal','rose','olive','slate'].forEach(k=>PAL['f-'+k]=g('--ig-f-'+k));
+}
+
+/* ── renderer（正交鏡頭＝等距感，跟墨金舞台一致） ── */
+const stage=$('#stage');
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.domElement.className='gl';
+stage.insertBefore(renderer.domElement,stage.firstChild);
+const scene=new THREE.Scene();
+const camera=new THREE.OrthographicCamera(-10,10,10,-10,0.1,800);
+
+/* 面：頂面＝本色，正面疊墨 12%、側面 20%、底面 26%（§11 明暗公式，不打彩色光） */
+const FVS=`varying vec3 vN;varying vec2 vUv;void main(){vN=normalize(mat3(modelMatrix)*normal);vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`;
+const FFS=`uniform vec3 uColor;uniform vec3 uInk;uniform vec3 uPaper;uniform float uAlpha;uniform float uDim;uniform sampler2D uMap;uniform float uUseMap;uniform float uFlat;varying vec3 vN;varying vec2 vUv;
+void main(){vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;float k;if(n.y>0.55)k=0.0;else if(n.y<-0.55)k=0.26;else k=abs(n.z)>=abs(n.x)?0.12:0.20;k*=uFlat;
+vec3 c=uColor;if(uUseMap>0.5)c*=texture2D(uMap,vUv).rgb;c=mix(c,uInk,k);c=mix(c,uPaper,uDim);gl_FragColor=vec4(c,uAlpha*(1.0-uDim*0.35));}`;
+const HVS=`uniform float uW;void main(){vec3 p=position+normal*uW;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}`;
+const HFS=`uniform vec3 uInk;uniform float uAlpha;void main(){gl_FragColor=vec4(uInk,uAlpha);}`;
+const allFaces=[],allHulls=[],lineMats=[],basicMats=[];
+function lineMat(role,w,extra){const m=new THREE.LineMaterial(Object.assign({color:0x000000,linewidth:w||1.4,transparent:true,opacity:1},extra||{}));m.userData.role=role||'ink2';lineMats.push(m);return m;}
+function faceMat(role,o){o=o||{};const a=o.alpha==null?1:o.alpha;const m=new THREE.ShaderMaterial({uniforms:{uColor:{value:new THREE.Color()},uInk:{value:new THREE.Color()},uPaper:{value:new THREE.Color()},uAlpha:{value:a},uDim:{value:0},uMap:{value:o.map||null},uUseMap:{value:o.map?1:0},uFlat:{value:o.flat==null?1:o.flat}},vertexShader:FVS,fragmentShader:FFS,transparent:a<1,depthWrite:a>=1,side:o.side||THREE.FrontSide});m.userData={role,a0:a};allFaces.push(m);return m;}
+function hullMat(w){const m=new THREE.ShaderMaterial({uniforms:{uInk:{value:new THREE.Color()},uAlpha:{value:1},uW:{value:w||.09}},vertexShader:HVS,fragmentShader:HFS,side:THREE.BackSide,transparent:true});allHulls.push(m);return m;}
+function basic(role,o){const m=new THREE.MeshBasicMaterial(Object.assign({color:0xffffff},o||{}));m.userData.role=role;basicMats.push(m);return m;}
+
+/* 零件：每個都有自己的墨線材質，方便聚焦時加粗 */
+const parts=[],P={};
+function mkPart(id,base,off,d,o){const g=new THREE.Group();scene.add(g);const p=Object.assign({id,g,base:V(...base),off:V(...off),d,em:lineMat('ink2',1.4),faces:[],hulls:[],e:0},o||{});g.position.copy(p.base);parts.push(p);P[id]=p;return p;}
+function add(p,geo,role,o){o=o||{};const parent=o.parent||p.g;const m=faceMat(role,o);const mesh=new THREE.Mesh(geo,m);
+  if(o.pos)mesh.position.set(...o.pos);if(o.rot)mesh.rotation.set(...o.rot);if(o.scale)mesh.scale.set(...o.scale);if(o.order)mesh.renderOrder=o.order;parent.add(mesh);p.faces.push(m);
+  if(o.edges!==false){const ls=new THREE.LineSegments2(new THREE.LineSegmentsGeometry().fromEdgesGeometry(new THREE.EdgesGeometry(geo,o.angle||28)),p.em);ls.renderOrder=(o.order||0)+1;mesh.add(ls);}
+  if(o.hull){const hm=hullMat(o.hullW);const h=new THREE.Mesh(geo,hm);mesh.add(h);p.hulls.push(hm);}
+  return mesh;}
+const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d);
+function tex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.anisotropy=4;return t;}
+const lineTex=(fn)=>tex(512,512,(g,w,h)=>{g.fillStyle='#fff';g.fillRect(0,0,w,h);g.strokeStyle='rgba(0,0,0,.13)';g.lineWidth=2;fn(g,w,h);});
+
+/* 舞台地板：墨金等角台＋淡格線 */
+const plate=mkPart('plate',[0,-12.1,0],[0,0,0],0);
+add(plate,B(66,1.4,66),'raised');
+add(plate,new THREE.PlaneGeometry(66,66),'raised',{pos:[0,.71,0],rot:[-Math.PI/2,0,0],edges:false,map:lineTex((g,w,h)=>{for(let x=0;x<=w;x+=w/24){g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.moveTo(0,x);g.lineTo(w,x);g.stroke();}})});
+
+/* 底座＋地板 */
+const pBase=mkPart('base',[0,-2,0],[0,-7,0],.15);
+add(pBase,B(26,4,26),'f-sand');
+add(pBase,B(10.6,2.8,.12),'ink2',{pos:[0,0,13.0],edges:false});
+add(pBase,new THREE.PlaneGeometry(23.4,23.4),'t-sand',{pos:[0,2.02,0],rot:[-Math.PI/2,0,0],map:lineTex((g,w,h)=>{for(let x=0;x<=w;x+=w/12){g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.stroke();}})});
+
+/* 抽屜＋骨灰小罐 */
+const pDrawer=mkPart('drawer',[0,-2,8.05],[0,-7,14],.25);
+add(pDrawer,B(10,2.4,10),'t-orange');
+add(pDrawer,new THREE.SphereGeometry(.4,16,12),'f-sand',{pos:[0,0,5.25],edges:false,hull:true,hullW:.07});
+const urnG=new THREE.Group();pDrawer.g.add(urnG);
+add(pDrawer,new THREE.CylinderGeometry(1.1,.9,1.9,28),'raised',{parent:urnG,pos:[0,2.15,0],hull:true,hullW:.08});
+add(pDrawer,new THREE.SphereGeometry(1.1,28,12,0,Math.PI*2,0,Math.PI/2),'raised',{parent:urnG,pos:[0,3.1,0],edges:false,hull:true,hullW:.08});
+
+/* 壓克力外罩 */
+const pFront=mkPart('front',[0,11,12],[0,0,32],.35,{shell:true});
+add(pFront,B(24,22,.3),'t-blue',{alpha:.24,side:THREE.DoubleSide,flat:.35,order:2});
+const pLeft=mkPart('left',[-12,11,0],[-17,0,0],.3,{shell:true});
+add(pLeft,B(.3,22,23.4),'t-blue',{alpha:.24,side:THREE.DoubleSide,flat:.35,order:2});
+const pRight=mkPart('right',[12,11,0],[17,0,0],.3,{shell:true});
+add(pRight,B(.3,22,23.4),'t-blue',{alpha:.24,side:THREE.DoubleSide,flat:.35,order:2});
+const pBack=mkPart('back',[0,11,-11.8],[0,0,-15],.3);
+add(pBack,B(23.4,22,.4),'f-slate');
+
+/* 頂蓋：中間開手機窗 */
+const pCap=mkPart('cap',[0,22.5,0],[0,14,0],.55);
+[[24,8.4,0,-7.8],[24,.4,0,11.8],[8.2,15.2,-7.9,4],[8.2,15.2,7.9,4]].forEach(a=>add(pCap,B(a[0],1,a[1]),'ink2',{pos:[a[2],0,a[3]]}));
+
+/* 狗：墨線插畫（透明底＝盒子裡看到的；黑底＝手機上播的） */
+const DW=360,DH=730;
+const dogC=document.createElement('canvas');dogC.width=DW;dogC.height=DH;const dg=dogC.getContext('2d');
+const phoneC=document.createElement('canvas');phoneC.width=DW;phoneC.height=DH;const pg=phoneC.getContext('2d');
+function ell(g,x,y,rx,ry,r){g.beginPath();g.ellipse(x,y,rx,ry,r||0,0,Math.PI*2);}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.lineTo(x+w-r,y);g.quadraticCurveTo(x+w,y,x+w,y+r);g.lineTo(x+w,y+h-r);g.quadraticCurveTo(x+w,y+h,x+w-r,y+h);g.lineTo(x+r,y+h);g.quadraticCurveTo(x,y+h,x,y+h-r);g.lineTo(x,y+r);g.quadraticCurveTo(x,y,x+r,y);g.closePath();}
+function drawDog(tm){
+  const g=dg,w=DW,h=DH,cx=w/2,u=w/10,gr=h*.975;
+  g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,w,h);
+  const fur='#fbf7f1',shade='#ebe1d1',tan='#d5b07a',band='#e8834d',ink='#1d1b18';
+  g.lineJoin='round';g.lineCap='round';g.strokeStyle=ink;g.lineWidth=4.2;
+  const fs=(c)=>{g.fillStyle=c;g.fill();g.stroke();};
+  const br=Math.sin(tm*2.4)*2;
+  const wave=Math.pow(Math.max(0,Math.sin(tm*.85)),3);
+  g.save();g.translate(cx+2.5*u,gr-5*u);g.rotate(-.8+Math.sin(tm*10)*.45);ell(g,0,-1.2*u,.42*u,1.35*u);fs(tan);g.restore();
+  rr(g,cx-2.7*u,gr-3*u,1.25*u,3*u,.55*u);fs(shade);rr(g,cx+1.45*u,gr-3*u,1.25*u,3*u,.55*u);fs(shade);
+  ell(g,cx,gr-4.9*u+br*.3,2.9*u,2.55*u);fs(fur);
+  rr(g,cx-1.75*u,gr-4.4*u,1.15*u,4.4*u,.55*u);fs(fur);
+  g.save();g.translate(cx+1.15*u,gr-4.3*u);g.rotate(-wave*2.1);rr(g,-.58*u,0,1.15*u,4.3*u,.55*u);fs(fur);g.restore();
+  g.beginPath();g.moveTo(cx-2.25*u,gr-7.35*u);g.quadraticCurveTo(cx,gr-6.7*u,cx+2.25*u,gr-7.35*u);g.lineTo(cx+.25*u,gr-5*u);g.closePath();fs(band);
+  g.save();g.translate(cx,gr-9.35*u+br*.5);g.rotate(Math.sin(tm*.7)*.09);
+  g.save();g.translate(-1.95*u,-1.55*u);g.rotate(-.55+Math.sin(tm*3.1)*.06);ell(g,0,0,.85*u,1.6*u);fs(tan);g.restore();
+  g.save();g.translate(1.95*u,-1.55*u);g.rotate(.55-Math.sin(tm*3.1)*.06);ell(g,0,0,.85*u,1.6*u);fs(tan);g.restore();
+  ell(g,0,0,2.4*u,2.3*u);fs(fur);
+  g.lineWidth=3.2;ell(g,0,1.1*u,1.25*u,.9*u);fs('#ffffff');
+  const blink=(tm%4.3)<.12?.15:1;g.fillStyle=ink;
+  ell(g,-.95*u,-.25*u,.3*u,.3*u*blink);g.fill();ell(g,.95*u,-.25*u,.3*u,.3*u*blink);g.fill();
+  if(blink===1){g.fillStyle='#fff';ell(g,-.86*u,-.36*u,.09*u,.09*u);g.fill();ell(g,1.04*u,-.36*u,.09*u,.09*u);g.fill();}
+  g.fillStyle=ink;ell(g,0,.72*u,.42*u,.3*u);g.fill();
+  ell(g,0,1.72*u,.34*u,.32*u+Math.max(0,Math.sin(tm*5))*.07*u);fs('#f2a9a0');
+  g.beginPath();g.moveTo(0,1.0*u);g.lineTo(0,1.35*u);g.moveTo(-.7*u,1.25*u);g.quadraticCurveTo(-.35*u,1.62*u,0,1.35*u);g.quadraticCurveTo(.35*u,1.62*u,.7*u,1.25*u);g.stroke();
+  g.restore();
+  pg.fillStyle='#000';pg.fillRect(0,0,w,h);pg.drawImage(dogC,0,0);
+}
+drawDog(0);
+const dogTex=new THREE.CanvasTexture(dogC);
+const phoneTex=new THREE.CanvasTexture(phoneC);phoneTex.wrapT=THREE.RepeatWrapping;phoneTex.repeat.set(1,-1);phoneTex.offset.set(0,1);
+
+/* 手機：螢幕朝下，影片上下翻轉過 */
+const pPhone=mkPart('phone',[0,23.4,4],[0,27,0],.7,{flip:true});
+add(pPhone,B(7.6,.8,15.4),'ink');
+const screen=new THREE.Mesh(new THREE.PlaneGeometry(7,14.6),new THREE.MeshBasicMaterial({map:phoneTex,side:THREE.DoubleSide}));
+screen.rotation.x=Math.PI/2;screen.position.y=-.41;pPhone.g.add(screen);
+
+/* 45° 分光片：平面 y + z = 12 */
+const C=12,YS=22.99,ZV=C-YS;
+const pGlass=mkPart('glass',[0,11,1],[0,12,12],.45);
+pGlass.g.rotation.x=-Math.PI/4;
+add(pGlass,new THREE.PlaneGeometry(23.4,22*Math.SQRT2),'accent',{alpha:.55,side:THREE.DoubleSide,flat:.25,order:3});
+
+/* 微景觀 */
+const pProps=mkPart('props',[0,0,0],[0,6,0],.2);
+add(pProps,new THREE.CylinderGeometry(5.6,5.6,.5,56),'t-amber',{pos:[0,.25,-6.2],map:tex(512,512,(g,w,h)=>{g.fillStyle='#fff';g.fillRect(0,0,w,h);g.strokeStyle='rgba(0,0,0,.16)';g.lineWidth=3;for(let r=10;r<w/2;r+=14){g.beginPath();g.arc(w/2,h/2,r,0,Math.PI*2);g.stroke();}})});
+[-7.6,7.6].forEach(x=>add(pProps,new THREE.SphereGeometry(1,28,18),'raised',{pos:[x,1.25,-8.6],scale:[2.3,1.3,1.6],rot:[0,x<0?.35:-.35,0],edges:false,hull:true,hullW:.07}));
+[[5.4,1.6],[7.4,-.2]].forEach(p=>{add(pProps,new THREE.CylinderGeometry(1.15,.85,.75,28),'t-mint',{pos:[p[0],.38,p[1]]});add(pProps,new THREE.CylinderGeometry(.95,.95,.06,24),'f-orange',{pos:[p[0],.77,p[1]],edges:false});});
+add(pProps,new THREE.SphereGeometry(.8,24,16),'t-red',{pos:[-5.8,.8,-.6],edges:false,hull:true,hullW:.07});
+add(pProps,B(2.2,1.5,.25),'t-violet',{pos:[2.6,.95,-1.8],rot:[-.25,-.3,0]});
+
+/* 虛像：大腦以為狗站在這裡（疊在最上層，跟真實反射一樣擋不住） */
+const virt=new THREE.Mesh(new THREE.PlaneGeometry(7,14.6),new THREE.MeshBasicMaterial({map:dogTex,transparent:true,depthWrite:false,depthTest:false}));
+virt.position.set(0,C-4,ZV);virt.renderOrder=20;scene.add(virt);
+
+/* 光路 */
+const EYE=V(0,9,31);
+const rayG=new THREE.Group();scene.add(rayG);
+const rayM=lineMat('ink2',1.8),dashM=lineMat('soft',1.6,{dashed:true,dashSize:.7,gapSize:.5});
+const rayPos=[],dashPos=[],rays=[];
+const rayPart={faces:[],hulls:[],em:rayM,g:rayG};
+[13.6,10.2,6.8,3.4].forEach((vy,i)=>{
+  const Vp=V(0,vy,ZV);const s=(C-EYE.y-EYE.z)/((Vp.y-EYE.y)+(Vp.z-EYE.z));
+  const G=EYE.clone().add(Vp.clone().sub(EYE).multiplyScalar(s));const S=V(0,YS,C-vy);
+  rayPos.push(...S.toArray(),...G.toArray(),...G.toArray(),...EYE.toArray());
+  dashPos.push(...G.toArray(),...Vp.toArray());
+  const pulse=add(rayPart,new THREE.SphereGeometry(.42,16,12),'accentStrong',{edges:false,hull:true,hullW:.08});
+  const dot=add(rayPart,new THREE.SphereGeometry(.28,12,10),'raised',{pos:Vp.toArray(),edges:false,hull:true,hullW:.07});
+  rays.push({S,G,pulse,phase:i*.25});
+});
+const rx=3.5,ry0=.7,ry1=15.3;
+dashPos.push(-rx,ry0,ZV,rx,ry0,ZV, rx,ry0,ZV,rx,ry1,ZV, rx,ry1,ZV,-rx,ry1,ZV, -rx,ry1,ZV,-rx,ry0,ZV);
+const rayL=new THREE.LineSegments2(new THREE.LineSegmentsGeometry().setPositions(rayPos),rayM);rayG.add(rayL);
+const dashL=new THREE.LineSegments2(new THREE.LineSegmentsGeometry().setPositions(dashPos),dashM);dashL.computeLineDistances();rayG.add(dashL);
+add(rayPart,new THREE.SphereGeometry(1,24,16),'raised',{pos:EYE.toArray(),edges:false,hull:true,hullW:.1});
+add(rayPart,new THREE.SphereGeometry(.45,16,12),'ink',{pos:[EYE.x,EYE.y,EYE.z-.7],edges:false});
+
+/* ── 3D 標籤 ── */
+const MODS=[
+  ['sand','01. 光源',[['手機','phone']]],
+  ['green','02. 光學',[['45° 分光片','glass'],['前板','front'],['側板 ×2','side'],['背板','back']]],
+  ['violet','03. 結構',[['頂蓋','cap'],['木質底座','base'],['抽屜','drawer']]],
+  ['orange','04. 佈景',[['微景觀','props']]]
+];
+const partColor={};MODS.forEach(([c,,ls])=>ls.forEach(([,id])=>partColor[id]=c));
+const LAB=[
+  {set:'A',id:'phone',t:'手機',s:'翻過來看，影片是倒的',p:pPhone,o:[4.6,0,-5]},
+  {set:'A',id:'cap',t:'頂蓋',s:'開手機大小的窗',p:pCap,o:[-11,0,-8]},
+  {set:'A',id:'glass',t:'45° 分光片',s:'半反射、半穿透',p:pGlass,o:[-11.7,9,0]},
+  {set:'A',id:'front',t:'前板',s:'透明壓克力',p:pFront,o:[7,11,0]},
+  {set:'A',id:'side',t:'側板',s:'多反射一隻分身',p:pRight,o:[0,11,8]},
+  {set:'A',id:'back',t:'背板',s:'越暗越清楚',p:pBack,o:[8,11,0]},
+  {set:'A',id:'props',t:'微景觀',s:'圓墊、靠墊、碗',p:pProps,o:[-7.6,2.6,-8.6]},
+  {set:'A',id:'base',t:'木質底座',s:'',p:pBase,o:[-13,2,6]},
+  {set:'A',id:'drawer',t:'抽屜',s:'放骨灰小罐',p:pDrawer,o:[0,4.4,0]},
+  {set:'B',n:1,t:'手機螢幕朝下',s:'光往下射',w:V(0,23.6,6)},
+  {set:'B',n:2,t:'45° 分光片',s:'轉 90° 送到眼前',w:V(0,4.2,7.8)},
+  {set:'B',n:3,t:'虛像',s:'大腦以為狗在這',w:V(0,15.6,ZV),v:true},
+  {set:'B',n:4,t:'妳的眼睛',s:'',w:V(0,10.2,EYE.z)}
+];
+const tagsEl=$('#tags3d');
+LAB.forEach(l=>{const el=document.createElement('div');el.className='tag'+(l.v?' is-v':'');const c=l.id?`style="--c:var(--ig-f-${partColor[l.id]})"`:'';
+  el.innerHTML=`<span class="tag__s"><i ${c}></i>${l.n?`<b style="font-family:var(--ig-font-mono)">${l.n}</b>`:''}${l.t}${l.s?`<small>${l.s}</small>`:''}</span><span class="tag__stem"></span><span class="tag__dot"></span>`;
+  tagsEl.appendChild(el);l.el=el;});
+
+/* ── 步驟 ── */
+const callout=(k,ti,tx)=>`<div class="ig-callout ig-callout--${k}"><span class="ig-callout__icon">${svg(k==='warn'?'warn':k==='tip'?'bulb':'spark')}</span><div><div class="ig-callout__title">${ti}</div><p>${tx}</p></div></div>`;
+const STEPS=[
+  {t0:0,t1:2,label:'成品',chap:'開場',h:'看起來像全息投影',p:'狗站在小房間的圓墊上，會搖尾巴、會舉手。其實盒子裡沒有任何電子零件。',c:callout('insight','線索','妳截圖第 2 張的盒頂看得到一隻倒過來的狗，那就是手機螢幕。')},
+  {t0:2,t1:12,label:'拆開',chap:'爆炸圖',h:'一層一層拆開',p:'由上到下：手機、頂蓋、45° 分光片、透明外罩、背板、微景觀、底座抽屜。唯一的螢幕是妳自己的手機。',c:callout('tip','試試看','點左邊的零件，可以單獨看那一片。')},
+  {t0:12,t1:15.5,label:'轉到側面',chap:'剖面',h:'合起來，從側面看',p:'光學的祕密只看得到側面：手機在最上面，分光片從前下角斜拉到後上角。'},
+  {t0:15.5,t1:18.2,label:'手機朝下',chap:'光路 ①',h:'① 手機螢幕朝下',p:'手機躺在頂蓋上、螢幕朝下，播放黑底、上下翻轉過的狗狗影片，光一路往下射。'},
+  {t0:18.2,t1:20.8,label:'45° 反射',chap:'光路 ②',h:'② 45° 分光片把光轉向妳',p:'薄透明壓克力讓一部分光穿過、一部分光反射。往下的光撞上 45° 的片子，剛好轉 90° 射進妳的眼睛。',c:callout('warn','留意','壓克力只反射一小部分光，大約一成以內，所以要在暗一點的地方看。')},
+  {t0:20.8,t1:23.5,label:'虛像',chap:'光路 ③',h:'③ 大腦把狗放到後面',p:'眼睛只會假設光走直線，於是把狗放在虛線的位置：背板前面、圓墊上方。那裡其實什麼都沒有。',c:callout('insight','關鍵','虛像到分光片的距離，等於手機到分光片的距離。佈景往後擺，狗才會剛好踩在墊子上。')},
+  {t0:23.5,t1:30,label:'黑色＝透明',chap:'收尾',h:'④ 黑色等於透明',p:'黑色像素不發光，就沒有東西被反射。手機上整片黑底，盒子裡只剩一隻狗疊在真實的佈景上。',c:callout('tip','做影片時','背景必須純黑 #000，用 OLED 手機最乾淨。')}
+];
+const GOALS=[['手機藏在哪裡',3],['盒子裡有哪些零件',1],['45° 分光片怎麼反射',4],['虛像為什麼在後面',5],['黑色為什麼是透明的',6]];
+const stepsOl=$('#steps ol');
+stepsOl.innerHTML=STEPS.map((s,i)=>`<li><button type="button" aria-label="第 ${i+1} 步：${s.label}"><span class="ig-steps__dot">${i+1}</span><span class="ig-steps__label">${s.label}</span></button></li>`).join('');
+const stepLis=[...stepsOl.children];
+$('#goals').innerHTML=GOALS.map(([g])=>`<li><span class="ig-check">${svg('check',11)}</span><span>${g}</span></li>`).join('');
+const goalLis=[...$('#goals').children];
+const CHIPS=[['box','電子零件','0 個','good'],['angle','分光片','45°',''],['phone','螢幕','1 支手機',''],['tag','售價','US$69–109','']];
+$('#chips').innerHTML=CHIPS.map(([i,l,v,lv])=>`<div class="ig-stat"${lv?` data-level="${lv}"`:''}><span class="ig-stat__label">${svg(i,12)}${l}</span><span class="ig-stat__value is-swap">${v}</span></div>`).join('');
+
+/* 零件樹 */
+const modsEl=$('#mods');
+modsEl.innerHTML=MODS.map(([c,t,ls])=>`<li class="ig-mod is-open"><button class="ig-mod__head" type="button" aria-expanded="true">${svg('chev',14,'class="ig-mod__chev"')}${folder(c)}<span class="ig-mod__title">${t}</span><span class="ig-mod__count">${ls.length}</span></button>
+<div class="ig-mod__body"><div class="ig-mod__clip"><ul class="ig-mod__list">${ls.map(([n,id])=>`<li class="ig-leaf" data-part="${id}"><button type="button"><i class="sw" style="--c:var(--ig-f-${c})"></i><span>${n}</span></button></li>`).join('')}</ul></div></div></li>`).join('');
+modsEl.addEventListener('click',e=>{
+  const head=e.target.closest('.ig-mod__head');
+  if(head){const li=head.parentElement;const o=!li.classList.contains('is-open');li.classList.toggle('is-open',o);head.setAttribute('aria-expanded',o);li.querySelectorAll('.ig-leaf button').forEach(b=>b.tabIndex=o?0:-1);return;}
+  const leaf=e.target.closest('.ig-leaf');if(leaf)focusPart(leaf.dataset.part===focusId?null:leaf.dataset.part);
+});
+
+/* ── 時間軸狀態 ── */
+let t=reduced?8:0,playing=!reduced,stopAt=null,focusId=null,stepIdx=-1,maxStep=0;
+const pauseBtn=$('#pause');
+function setPlaying(v){playing=v;pauseBtn.setAttribute('aria-pressed',String(!v));pauseBtn.querySelector('span').textContent=v?'暫停':'播放';
+  pauseBtn.querySelector('svg').innerHTML=v?'<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>':'<path d="M7 4.5v15l12-7.5z"/>';}
+setPlaying(playing);
+pauseBtn.addEventListener('click',()=>{if(!playing){stopAt=null;if(t>=T-.02)t=0;}setPlaying(!playing);});
+$('#replay').addEventListener('click',()=>{focusPart(null,true);t=0;stopAt=null;setPlaying(true);});
+function go(i){i=clamp(i,0,STEPS.length-1);focusPart(null,true);t=STEPS[i].t0+.001;stopAt=STEPS[i].t1-.001;setPlaying(!reduced);if(reduced)t=STEPS[i].t1-.01;}
+stepLis.forEach((li,i)=>li.querySelector('button').addEventListener('click',()=>go(i)));
+$('#next').addEventListener('click',()=>go(stepIdx>=STEPS.length-1?0:stepIdx+1));
+$('#back').addEventListener('click',()=>go(stepIdx-1));
+document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea'))return;if(e.key==='ArrowRight')go(stepIdx+1);if(e.key==='ArrowLeft')go(stepIdx-1);});
+function focusPart(id,silent){focusId=id;modsEl.querySelectorAll('.ig-leaf').forEach(l=>l.classList.toggle('is-current',l.dataset.part===id));
+  if(id&&!silent){t=8;stopAt=null;setPlaying(false);}}
+
+const content=$('#content'),chapter=$('#chapter');
+function showStep(i){
+  stepIdx=i;maxStep=Math.max(maxStep,i);const s=STEPS[i];
+  content.classList.remove('ig-enter');content.innerHTML=`<h2>${s.h}</h2><p>${s.p}</p>${s.c||''}`;void content.offsetWidth;content.classList.add('ig-enter');
+  chapter.textContent=s.chap;chapter.classList.remove('is-in');void chapter.offsetWidth;chapter.classList.add('is-in');
+  stepLis.forEach((li,k)=>{li.classList.toggle('is-current',k===i);li.classList.toggle('is-done',k<i);});
+  $('#steps .ig-steps__rail>span').style.width=(i/(STEPS.length-1)*100)+'%';
+  $('#stepMeta').textContent=`第 ${i+1} / ${STEPS.length} 步`;$('#stepCount').textContent=`第 ${i+1} 步 · 共 ${STEPS.length} 步`;
+  $('#nextLabel').textContent=i>=STEPS.length-1?'從頭再看':'下一步：'+STEPS[i+1].label;$('#back').disabled=i===0;
+  let hit=0;goalLis.forEach((li,k)=>{const on=maxStep>=GOALS[k][1];li.classList.toggle('is-hit',on);li.querySelector('.ig-check').classList.toggle('is-on',on);if(on)hit++;});
+  $('#progN').textContent=`${hit} / ${GOALS.length}`;$('#progBar>span').style.width=(hit/GOALS.length*100)+'%';
+  $('#inset').classList.toggle('is-on',i===STEPS.length-1);
+}
+
+/* ── 鏡頭 ── */
+const camKeys=[
+  {t:0, d:[1,.8,1.1],  q:[0,9.5,0], w:44,h:44},
+  {t:2, d:[1,.8,1.1],  q:[0,9.5,0], w:44,h:44},
+  {t:6, d:[1,.85,1.15],q:[0,19,5], w:76,h:90},
+  {t:12,d:[.5,.8,1.25],q:[0,19,5], w:76,h:90},
+  {t:15,d:[1,.04,.02], q:[0,12,9.5],w:56,h:46},
+  {t:23,d:[1,.04,.02], q:[0,12,9.5],w:56,h:46},
+  {t:26,d:[.32,.16,1], q:[0,9.5,0], w:38,h:38},
+  {t:28,d:[.32,.16,1], q:[0,9.5,0], w:38,h:38},
+  {t:30,d:[1,.8,1.1],  q:[0,9.5,0], w:44,h:44}
+];
+function camAt(t){let i=0;while(i<camKeys.length-2&&t>camKeys[i+1].t)i++;const a=camKeys[i],b=camKeys[i+1];const s=smooth((t-a.t)/(b.t-a.t));
+  return{d:V(...a.d).normalize().lerp(V(...b.d).normalize(),s).normalize(),q:V(...a.q).lerp(V(...b.q),s),w:a.w+(b.w-a.w)*s,h:a.h+(b.h-a.h)*s};}
+let SW=1,SH=1;
+function resize(){SW=stage.clientWidth;SH=stage.clientHeight;renderer.setSize(SW,SH,false);lineMats.forEach(m=>m.resolution.set(SW,SH));}
+(window.ResizeObserver?new ResizeObserver(resize).observe(stage):addEventListener('resize',resize));resize();
+let yaw=0,pitch=0,drag=false,lx=0,ly=0;
+const cv=renderer.domElement;
+cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;try{cv.setPointerCapture(e.pointerId);}catch(_){}});
+cv.addEventListener('pointermove',e=>{if(!drag)return;yaw-=(e.clientX-lx)*.006;pitch+=(e.clientY-ly)*.004;pitch=clamp(pitch,-.6,.6);lx=e.clientX;ly=e.clientY;});
+['pointerup','pointercancel'].forEach(n=>cv.addEventListener(n,()=>drag=false));
+const sph=new THREE.Spherical();
+
+/* ── 套色 ── */
+function applyPal(){
+  readPal();scene.background=PAL.stage;
+  allFaces.forEach(m=>{m.uniforms.uColor.value.copy(PAL[m.userData.role]||PAL.raised);m.uniforms.uInk.value.copy(PAL.ink);m.uniforms.uPaper.value.copy(PAL.stage);});
+  allHulls.forEach(m=>m.uniforms.uInk.value.copy(PAL.ink2));
+  lineMats.forEach(m=>m.color.copy(PAL[m.userData.role]||PAL.ink2));
+  const bg=getComputedStyle(body).getPropertyValue('--ig-stage-bg').trim();
+  insetB.style.background=bg;
+}
+const insetA=$('#inA'),insetB=$('#inB'),iA=insetA.getContext('2d'),iB=insetB.getContext('2d');
+new MutationObserver(()=>requestAnimationFrame(applyPal)).observe(body,{attributes:true,attributeFilter:['data-theme','data-palette']});
+applyPal();
+
+/* ── 每一格 ── */
+const tmp=new THREE.Vector3();
+function update(t,clock){
+  const E=t<12?ramp(t,2,6):1-ramp(t,12,15);
+  const shellF=1-.8*(ramp(t,15,16)-ramp(t,23,24));
+  const rayA=ramp(t,15.5,16.5)-ramp(t,23,24);
+  const dashA=ramp(t,20.8,21.4)-ramp(t,23,24);
+  const labA=focusId?1:ramp(t,5,6)-ramp(t,11.4,12.2);
+  const labB=ramp(t,16,17)-ramp(t,22.8,23.6);
+  const glassHi=ramp(t,18.2,18.6)-ramp(t,20.8,21.2);
+
+  parts.forEach(p=>{
+    const e=smooth((E-p.d*.35)/.65);p.e=e;
+    p.g.position.copy(p.base).addScaledVector(p.off,e);
+    if(p.flip)p.g.rotation.x=Math.PI*e;
+    const isF=focusId&&(p.id===focusId||(focusId==='side'&&(p.id==='left'||p.id==='right')));
+    const dim=focusId&&!isF&&p.id!=='plate'?.62:0;
+    const a=p.shell?shellF:1;
+    p.faces.forEach(m=>{m.uniforms.uDim.value=dim;m.uniforms.uAlpha.value=m.userData.a0*a;});
+    p.hulls.forEach(m=>m.uniforms.uAlpha.value=dim?.35:1);
+    p.em.opacity=(dim?.3:1)*a;p.em.linewidth=isF?2.6:(p.id==='glass'?1.4+1.2*glassHi:1.4);
+  });
+  urnG.visible=pDrawer.e>.35;
+  virt.material.opacity=(1-smooth(E/.25))*(focusId?.25:.95);
+
+  rayG.visible=rayA>.002;
+  rayM.opacity=rayA;dashM.opacity=dashA;
+  rayPart.faces.forEach(m=>m.uniforms.uAlpha.value=rayA);rayPart.hulls.forEach(m=>m.uniforms.uAlpha.value=rayA);
+  rays.forEach(r=>{const k=((clock*.45)+r.phase)%1;const l1=r.S.distanceTo(r.G),l2=r.G.distanceTo(EYE),d=k*(l1+l2);
+    if(d<l1)r.pulse.position.copy(r.S).lerp(r.G,d/l1);else r.pulse.position.copy(r.G).lerp(EYE,(d-l1)/l2);});
+
+  const k=camAt(t);sph.setFromVector3(k.d);sph.theta+=yaw;sph.phi=clamp(sph.phi-pitch,.08,Math.PI-.08);const dir=V(0,0,0).setFromSpherical(sph);
+  if(!drag){yaw*=.965;pitch*=.965;}
+  const asp=SW/SH,halfH=Math.max(k.h/2,k.w/2/asp);
+  camera.left=-halfH*asp;camera.right=halfH*asp;camera.top=halfH;camera.bottom=-halfH;camera.updateProjectionMatrix();
+  camera.position.copy(k.q).addScaledVector(dir,300);camera.lookAt(k.q);camera.updateMatrixWorld();
+
+  LAB.forEach(l=>{
+    let a=l.set==='A'?labA:labB;
+    if(l.set==='A'&&focusId)a=(l.id===focusId)?1:0;
+    if(a<.01){l.el.style.opacity=0;return;}
+    const wp=l.w?l.w.clone():l.p.g.localToWorld(tmp.set(...l.o)).clone();
+    if(l.id==='side')wp.copy(pRight.g.localToWorld(tmp.set(...l.o)));
+    const v=wp.project(camera);const x=(v.x*.5+.5)*SW,y=(-v.y*.5+.5)*SH;
+    const ew=l.el.offsetWidth,eh=l.el.offsetHeight;
+    const tx=clamp(x-ew/2,6,SW-ew-6),ty=clamp(y-eh,70,SH-eh-6);
+    l.el.style.transform=`translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px)`;l.el.style.opacity=a.toFixed(3);
+    l.el.classList.toggle('is-focus',!!focusId&&l.id===focusId);
+  });
+
+  let si=0;STEPS.forEach((s,i)=>{if(t>=s.t0)si=i;});if(si!==stepIdx)showStep(si);
+}
+
+let visible=true;
+if(window.IntersectionObserver)new IntersectionObserver(es=>{visible=es[0].isIntersecting;}).observe(stage);
+let last=performance.now(),acc=0;
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(visible){
+    if(playing){t+=dt;if(stopAt!=null&&t>=stopAt){t=stopAt;stopAt=null;setPlaying(false);}if(t>=T)t=0;}
+    acc+=dt;if(acc>1/30&&!reduced){acc=0;drawDog(now/1000);dogTex.needsUpdate=true;phoneTex.needsUpdate=true;
+      if(stepIdx===STEPS.length-1){iA.clearRect(0,0,72,146);iA.drawImage(phoneC,0,0,72,146);iB.clearRect(0,0,72,146);iB.drawImage(dogC,0,0,72,146);}}
+    update(t,reduced?0:now/1000);renderer.render(scene,camera);
+  }
+  requestAnimationFrame(frame);
+}
+iA.drawImage(phoneC,0,0,72,146);iB.drawImage(dogC,0,0,72,146);
+requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>
